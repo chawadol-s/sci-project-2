@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สไลด์สอน - บทเรียนที่ 2: ชนิดโครงงานวิทยาศาสตร์</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- รวม CSS Styles ตรงนี้ -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็น Sarabun */
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #e1f5fe, #bbdefb); /* Subtle Gradient Blue Background */
+            color: #333;
+            overflow: hidden; /* Prevent scroll */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1000px;
+            height: 90%;
+            max-height: 700px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            display: none;
+            flex-direction: column; /* Content layout */
+            padding: 40px;
+            box-sizing: border-box;
+            overflow-y: auto; /* Enable scrolling if content overflows */
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out; /* Slightly slower fade transition */
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Content Styling */
+        .slide h1 {
+            color: #0D47A1; /* Dark Blue */
+            font-size: 2.8em; /* Larger title */
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Subtle text shadow */
+        }
+
+        .slide h2 {
+            color: #1565C0; /* Medium Blue */
+            font-size: 2.2em; /* Larger main heading */
+            border-bottom: 4px solid #bbdefb; /* Thicker, lighter blue border */
+            padding-bottom: 10px;
+            margin-bottom: 30px; /* More space below */
+            text-align: center;
+            text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.08);
+        }
+
+        .slide h3 {
+            color: #1976D2; /* Standard Blue */
+            font-size: 1.7em; /* Larger sub heading */
+            margin-top: 25px; /* More space above sub headings */
+            margin-bottom: 18px; /* More space below */
+            border-left: 6px solid #2196F3; /* Thicker Blue Left Border */
+            padding-left: 15px;
+        }
+
+        .slide p {
+            margin-bottom: 20px; /* More space between paragraphs */
+            font-size: 1.25em; /* Larger body text */
+            text-align: justify;
+        }
+
+        .slide ul {
+            margin-bottom: 20px;
+            padding-left: 35px; /* More padding */
+            font-size: 1.2em; /* Slightly larger list text */
+        }
+
+        .slide li {
+            margin-bottom: 12px; /* More space between list items */
+        }
+
+         .slide strong {
+            color: #0D47A1; /* Use Dark Blue for strong emphasis */
+             font-weight: 600; /* Semi-bold */
+        }
+
+        /* Illustrations */
+        .illustration {
+            text-align: center;
+            margin: 0 0 30px 0; /* Moved icon to top, add space BELOW */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping */
+        }
+
+        .illustration svg {
+            width: 180px; /* Even larger icons for slides */
+            height: auto;
+            margin: 15px 20px; /* More space around icons */
+            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.15)); /* Stronger subtle shadow */
+            transition: transform 0.3s ease; /* Add hover effect */
+        }
+
+        .illustration svg:hover {
+            transform: translateY(-8px) rotate(3deg); /* Lift and slightly rotate on hover */
+        }
+
+
+        /* Styling for Vector (SVG) Icons */
+        .illustration svg rect,
+        .illustration svg circle,
+        .illustration svg ellipse,
+        .illustration svg line,
+        .illustration svg path,
+        .illustration svg polygon,
+        .illustration svg polyline {
+            stroke-width: 4; /* Thicker strokes */
+            stroke-linecap: round; /* Rounded line caps */
+            stroke-linejoin: round; /* Rounded line joins */
+        }
+
+        .illustration svg text {
+             font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็น Sarabun */
+             font-weight: 600; /* Semi-bold */
+             fill: #333; /* Text color */
+             text-anchor: middle; /* Center text */
+             dominant-baseline: central; /* Vertically center text */
+             font-size: 18px; /* Default text size within icon */
+        }
+
+
+        /* Coloring Schemes for Icons */
+
+         /* General Icons (Blue/Teal Theme) */
+        .illustration.general svg .main-shape { fill: #BBDEFB; stroke: #2196F3; }
+        .illustration.general svg .accent-shape { fill: #1976D2; stroke: #1565C0; }
+        .illustration.general svg .lines { stroke: #1976D2; }
+        .illustration.general svg .text { fill: #0D47A1; font-size: 20px; } /* Larger text for labels */
+
+
+        /* Type Icons (Row Styling) */
+         .illustration.type-icons {
+             margin-top: 0; /* Less space above for this specific row */
+             margin-bottom: 20px;
+         }
+
+         .illustration.type-icons svg {
+              width: 120px; /* Adjust size for row display */
+             height: 120px;
+             margin: 10px 15px; /* Space around wrapped items */
+         }
+
+        /* สำรวจ - Yellow/Orange Theme */
+        .illustration.type-icons svg.survey-icon .main-shape,
+        .illustration.survey-icon svg .main-shape { fill: #FFF9C4; stroke: #FBC02D; }
+        .illustration.type-icons svg.survey-icon .accent-shape,
+        .illustration.survey-icon svg .accent-shape { fill: #FFC107; stroke: #FBC02D; }
+        .illustration.type-icons svg.survey-icon .lines,
+        .illustration.survey-icon svg .lines { stroke: #FBC02D; }
+        .illustration.type-icons svg.survey-icon .text,
+        .illustration.survey-icon svg .text { fill: #333; font-size: 16px; }
+
+
+        /* ทดลอง - Purple/Pink Theme */
+        .illustration.type-icons svg.experiment-icon .main-shape,
+        .illustration.experiment-icon svg .main-shape { fill: #E1BEE7; stroke: #AB47BC; } /* Slightly darker purple */
+        .illustration.type-icons svg.experiment-icon .accent-shape,
+        .illustration.experiment-icon svg .accent-shape { fill: #BA68C8; stroke: #9C27B0; }
+        .illustration.type-icons svg.experiment-icon .lines,
+        .illustration.experiment-icon svg .lines { stroke: #9C27B0; }
+        .illustration.type-icons svg.experiment-icon .text,
+        .illustration.experiment-icon svg .text { fill: #333; font-size: 16px; }
+
+
+        /* สิ่งประดิษฐ์ - Teal/Green Theme */
+        .illustration.type-icons svg.invention-icon .main-shape,
+        .illustration.invention-icon svg .main-shape { fill: #B2DFDB; stroke: #00897B; }
+        .illustration.type-icons svg.invention-icon .accent-shape,
+        .illustration.invention-icon svg .accent-shape { fill: #26A69A; stroke: #00796B; }
+        .illustration.type-icons svg.invention-icon .lines,
+        .illustration.invention-icon svg .lines { stroke: #00796B; }
+        .illustration.type-icons svg.invention-icon .text,
+        .illustration.invention-icon svg .text { fill: #333; font-size: 16px; }
+
+
+        /* ทฤษฎี - Darker Blue Theme */
+        .illustration.type-icons svg.theoretical-icon .main-shape,
+        .illustration.theoretical-icon svg .main-shape { fill: #BBDEFB; stroke: #1E88E5; }
+        .illustration.type-icons svg.theoretical-icon .accent-shape,
+        .illustration.theoretical-icon svg .accent-shape { fill: #1565C0; stroke: #0D47A1; }
+        .illustration.type-icons svg.theoretical-icon .lines,
+        .illustration.theoretical-icon svg .lines { stroke: #0D47A1; }
+        .illustration.type-icons svg.theoretical-icon .text,
+        .illustration.theoretical-icon svg .text { fill: #333; font-size: 16px; }
+
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 100;
+        }
+
+        .navigation-buttons button {
+            font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็น Sarabun */
+            padding: 12px 28px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #prevBtn {
+            background-color: #ffb74d; /* Medium Orange */
+            color: #333;
+        }
+
+        #prevBtn:hover:not(:disabled) {
+            background-color: #ffa726; /* Darker orange */
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+         #prevBtn:active:not(:disabled) {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nextBtn {
+            background-color: #81c784; /* Medium Green */
+            color: #333;
+        }
+
+        #nextBtn:hover:not(:disabled) {
+            background-color: #66bb6a; /* Darker green */
+             transform: translateY(-4px);
+             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+         #nextBtn:active:not(:disabled) {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+         .navigation-buttons button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Activity Link Button Styling */
+        .activity-link {
+            display: block;
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .activity-link a {
+            font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็น Sarabun */
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #2196F3; /* Blue */
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.4em;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-link a:hover {
+            background-color: #1976D2; /* Darker blue */
+             transform: translateY(-4px);
+             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+        }
+        .activity-link a:active {
+             transform: translateY(1px);
+             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 0.95em;
+            color: #555;
+            z-index: 100;
+            font-family: 'Sarabun', sans-serif; /* เปลี่ยนเป็น Sarabun */
+        }
+
+        footer p {
+            margin: 3px 0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active" id="slide-1">
+            <h1>รายวิชา วิทยาศาสตร์เพิ่มเติม ม. 2 (ว21101)</h1>
+            <h2>โครงงานวิทยาศาสตร์กับคุณภาพชีวิต</h2>
+            <h3>บทเรียนที่ 2: ชนิดของโครงงานวิทยาศาสตร์</h3>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.4em;">ผู้สอน: อาจารย์ ชวดล ศรีบุญพิมพ์สวย</p>
+            <p style="text-align: center; margin-top: 50px; color: #555; font-size: 1.2em;">ภาคเรียนที่ 2 / 2568</p>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide" id="slide-2">
+            <h2>หัวข้อในวันนี้</h2>
+             <div class="illustration general">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                   <rect class="main-shape" x="15" y="20" width="70" height="60" rx="8"/>
+                   <path class="lines" d="M25 35 H75 M25 45 H75 M25 55 H75 M25 65 H75"/>
+                   <text class="text" x="50" y="50">แผน</text>
+                </svg>
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                   <circle class="main-shape" cx="50" cy="50" r="40"/>
+                   <path class="accent-shape" d="M35 45 L50 60 L75 35" fill="none" stroke-width="6"/>
+                   <text class="text" x="50" y="50" font-size="30px">✓</text>
+                </svg>
+            </div>
+            <ul>
+                <li>ทบทวนความรู้พื้นฐานเกี่ยวกับโครงงานวิทยาศาสตร์</li>
+                <li>ความสำคัญของการจำแนกชนิดของโครงงาน</li>
+                <li>รู้จักโครงงานวิทยาศาสตร์ประเภทต่างๆ:
+                    <ul>
+                        <li>โครงงานประเภทสำรวจ (Survey)</li>
+                        <li>โครงงานประเภททดลอง (Experimental)</li>
+                        <li>โครงงานประเภทสิ่งประดิษฐ์ (Invention)</li>
+                        <li>โครงงานประเภททฤษฎี (Theoretical)</li>
+                    </ul>
+                </li>
+                <li>กิจกรรมจำแนกประเภทและทดสอบความเข้าใจ (ออนไลน์)</li>
+                <li>สรุปและถาม-ตอบ</li>
+            </ul>
+        </div>
+
+         <!-- Slide 3: Review -->
+        <div class="slide" id="slide-3">
+            <h2>ทบทวน: โครงงานวิทยาศาสตร์คืออะไร?</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                   <circle class="main-shape" cx="50" cy="50" r="45"/>
+                   <path class="lines" d="M30 40 Q40 30 50 40 Q60 30 70 40 M30 60 Q40 70 50 60 Q60 70 70 60" fill="none"/>
+                   <text class="text" x="50" y="50" font-size="40px">?</text>
+                </svg>
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="15" y="15" width="70" height="70" rx="10"/>
+                    <path class="accent-shape" d="M30 30 L70 70 M70 30 L30 70" fill="none"/>
+                    <text class="text" x="50" y="85" font-size="14px">ขั้นตอน</text>
+                 </svg>
+            </div>
+            <p>โครงงานวิทยาศาสตร์คือการศึกษาค้นคว้าที่นักเรียนดำเนินการด้วยตนเองหรือเป็นกลุ่ม เพื่อตอบปัญหาหรือข้อสงสัย โดยใช้ **กระบวนการทางวิทยาศาสตร์**</p>
+            <h3>ขั้นตอนภาพรวมของการทำโครงงานวิทยาศาสตร์:</h3>
+            <ol>
+                <li>การระบุปัญหาและเลือกหัวข้อที่สนใจ</li>
+                <li>การวางแผนและออกแบบการศึกษา (ตั้งสมมติฐาน, กำหนดตัวแปร, กำหนดวิธีดำเนินการ)</li>
+                <li>การจัดทำเค้าโครงโครงงาน (Proposal)</li>
+                <li>การลงมือปฏิบัติและเก็บรวบรวมข้อมูล</li>
+                <li>การวิเคราะห์ข้อมูลและแปลความหมาย</li>
+                <li>การสรุปผลและอภิปรายผล</li>
+                <li>การเขียนรายงานฉบับสมบูรณ์</li>
+                <li>การนำเสนอผลงานและจัดแสดง</li>
+            </ol>
+        </div>
+
+         <!-- Slide 4: Intro to Types -->
+        <div class="slide" id="slide-4">
+            <h2>ทำไมต้องจำแนกชนิดของโครงงาน?</h2>
+             <div class="illustration type-icons">
+                <!-- Survey Icon -->
+                <svg class="survey-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="20" y="20" width="60" height="60" rx="8"/>
+                    <line class="lines" x1="30" y1="35" x2="70" y2="35"/>
+                    <line class="lines" x1="30" y1="45" x2="70" y2="45"/>
+                    <line class="lines" x1="30" y1="55" x2="70" y2="55"/>
+                    <circle class="accent-shape" cx="50" cy="70" r="8"/>
+                    <text class="text" x="50" y="15">สำรวจ</text>
+                </svg>
+                 <!-- Experiment Icon -->
+                <svg class="experiment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="35" y="15" width="30" height="50" rx="5"/>
+                    <rect class="accent-shape" x="25" y="65" width="50" height="15" rx="5"/>
+                    <circle class="main-shape" cx="50" cy="40" r="12"/>
+                    <text class="text" x="50" y="15">ทดลอง</text>
+                </svg>
+                 <!-- Invention Icon -->
+                <svg class="invention-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="20" y="20" width="60" height="60" rx="10"/>
+                    <circle class="accent-shape" cx="50" cy="50" r="15"/>
+                    <path class="lines" d="M50 35 V15 M35 50 H15 M65 50 H85 M50 65 V85"/>
+                    <text class="text" x="50" y="15">ประดิษฐ์</text>
+                </svg>
+                 <!-- Theoretical Icon -->
+                <svg class="theoretical-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="15" y="15" width="70" height="70" rx="10"/>
+                    <circle class="accent-shape" cx="35" cy="35" r="10"/>
+                    <circle class="accent-shape" cx="65" cy="35" r="10"/>
+                    <circle class="accent-shape" cx="35" cy="65" r="10"/>
+                    <circle class="accent-shape" cx="65" cy="65" r="10"/>
+                    <line class="lines" x1="35" y1="35" x2="65" y2="65"/>
+                    <line class="lines" x1="65" y1="35" x2="35" y2="65"/>
+                    <text class="text" x="50" y="15">ทฤษฎี</text>
+                </svg>
+             </div>
+            <ul>
+                <li>เพื่อให้เห็น **ภาพรวม** และ **กรอบแนวคิด** ในการทำงาน</li>
+                <li>ช่วยในการ **เลือกหัวข้อ** ที่เหมาะสมกับความสนใจและทรัพยากร</li>
+                <li>ช่วยในการ **ออกแบบกระบวนการ** และ **วางแผนการดำเนินงาน**</li>
+                <li>เตรียมความพร้อมสำหรับการ **เขียนเค้าโครง** และ **รายงาน**</li>
+                <li>เป็นพื้นฐานในการ **สื่อสาร** และ **นำเสนอ** ผลงาน</li>
+            </ul>
+            <p>การเข้าใจประเภทของโครงงานจะช่วยให้นักเรียนดำเนินงานได้อย่างมีทิศทางและมีประสิทธิภาพ</p>
+        </div>
+
+        <!-- Slide 5: Type 1 - Survey -->
+        <div class="slide" id="slide-5">
+            <h2>1. โครงงานประเภทสำรวจ (Survey Project)</h2>
+            <div class="illustration survey-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="10" y="10" width="80" height="80" rx="10"/>
+                    <line class="lines" x1="20" y1="30" x2="80" y2="30"/>
+                    <line class="lines" x1="20" y1="45" x2="80" y2="45"/>
+                    <line class="lines" x1="20" y1="60" x2="80" y2="60"/>
+                    <rect class="accent-shape" x="30" y="75" width="40" height="10" rx="3"/>
+                    <text class="text" x="50" y="50" font-size="30px">Data</text>
+                </svg>
+            </div>
+            <h3>ลักษณะสำคัญ:</h3>
+            <ul>
+                <li><strong>การรวบรวมข้อมูล:</strong> สังเกต, สอบถาม, สัมภาษณ์, ใช้แบบสอบถาม, ค้นคว้าเอกสาร/ออนไลน์</li>
+                <li><strong>สภาพการณ์:</strong> ศึกษาจากสิ่งที่มีอยู่จริง ไม่มีการจัดสภาพการณ์ขึ้นใหม่</li>
+                <li><strong>การควบคุมตัวแปร:</strong> ไม่เน้นการควบคุมตัวแปรอย่างเข้มงวดเหมือนการทดลอง</li>
+                <li><strong>วัตถุประสงค์:</strong> อธิบาย, จำแนก, เปรียบเทียบ, รวบรวมข้อมูล</li>
+                <li><strong>ผลลัพธ์:</strong> นำเสนอในรูปแบบตาราง, กราฟ, แผนภาพ, รายงานเชิงบรรยาย</li>
+            </ul>
+            <p>เหมาะกับการศึกษาปรากฏการณ์ หรือความเห็น/พฤติกรรมในธรรมชาติหรือสังคม</p>
+        </div>
+
+         <!-- Slide 6: Type 1 - Survey Examples -->
+        <div class="slide" id="slide-6">
+            <h2>ตัวอย่างโครงงานประเภทสำรวจ</h2>
+            <ul>
+                <li>การสำรวจชนิดของนกที่พบบริเวณรอบวัดในชุมชน</li>
+                <li>การศึกษาความถี่ในการใช้น้ำดื่มจากตู้กดน้ำของนักเรียนชั้น ม.1-3</li>
+                <li>การรวบรวมข้อมูลพันธุ์ข้าวพื้นเมืองในจังหวัดเชียงใหม่</li>
+                <li>การสำรวจรูปแบบการเดินทางมาโรงเรียนของนักเรียน</li>
+                <li>การศึกษาข้อมูลสถิติการเกิดอุบัติเหตุบนท้องถนนในเขตอำเภอฝาง</li>
+            </ul>
+            <p>เน้นการเก็บข้อมูล "สิ่งที่เกิดขึ้นอยู่แล้ว" หรือ "ข้อมูลที่มีอยู่แล้ว"</p>
+        </div>
+
+        <!-- Slide 7: Type 2 - Experimental -->
+        <div class="slide" id="slide-7">
+            <h2>2. โครงงานประเภททดลอง (Experimental Project)</h2>
+             <div class="illustration experiment-icon">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="30" y="10" width="40" height="60" rx="8"/>
+                     <rect class="accent-shape" x="20" y="70" width="60" height="20" rx="8"/>
+                     <circle class="main-shape" cx="50" cy="40" r="20"/>
+                     <path class="lines" d="M50 60 V70"/>
+                     <text class="text" x="50" y="50" font-size="30px">Test</text>
+                 </svg>
+            </div>
+             <h3>ลักษณะสำคัญ:</h3>
+            <ul>
+                <li><strong>การจัดสภาพการณ์:</strong> สร้างสถานการณ์จำลองเพื่อทำการศึกษา</li>
+                <li><strong>การควบคุมตัวแปร:</strong>
+                    <ul>
+                        <li>**ตัวแปรต้น (Independent Variable):** สิ่งที่เราต้องการเปลี่ยนแปลงเพื่อศึกษาผล</li>
+                        <li>**ตัวแปรตาม (Dependent Variable):** ผลที่เกิดขึ้นจากการเปลี่ยนแปลงตัวแปรต้น</li>
+                        <li>**ตัวแปรควบคุม (Controlled Variable):** สิ่งที่ต้องควบคุมให้คงที่ เพื่อให้แน่ใจว่าผลที่ได้มาจากตัวแปรต้นเท่านั้น</li>
+                    </ul>
+                </li>
+                <li><strong>กระบวนการ:</strong> ตั้งสมมติฐาน, ออกแบบการทดลอง, ดำเนินการ, สังเกต/วัดผล, วิเคราะห์ผล, สรุปผล</li>
+                <li><strong>วัตถุประสงค์:</strong> ศึกษาความสัมพันธ์เชิงเหตุและผล, ทดสอบสมมติฐาน</li>
+            </ul>
+            <p>เป็นหัวใจสำคัญของการค้นคว้าทางวิทยาศาสตร์ ที่ต้องมีการควบคุมอย่างเป็นระบบ</p>
+        </div>
+
+        <!-- Slide 8: Type 2 - Experimental Examples -->
+        <div class="slide" id="slide-8">
+            <h2>ตัวอย่างโครงงานประเภททดลอง</h2>
+             <ul>
+                <li>**หัวข้อ:** ผลของชนิดของน้ำต่อการละลายของเกลือ
+                    <ul>
+                        <li>ตัวแปรต้น: ชนิดของน้ำ (น้ำประปา, น้ำฝน, น้ำกรอง)</li>
+                        <li>ตัวแปรตาม: ปริมาณเกลือที่ละลายได้</li>
+                        <li>ตัวแปรควบคุม: อุณหภูมิของน้ำ, ปริมาณน้ำ, เวลาในการคน</li>
+                    </ul>
+                </li>
+                 <li>**หัวข้อ:** การศึกษาประสิทธิภาพของปุ๋ยหมักต่อการเจริญเติบโตของต้นกะเพรา</li>
+                 <li>**หัวข้อ:** เปรียบเทียบแรงเสียดทานของพื้นผิววัสดุต่างชนิดกัน</li>
+                 <li>**หัวข้อ:** ศึกษาผลของแสงสีต่าง ๆ ต่อการงอกของเมล็ดพืช</li>
+            </ul>
+            <p>หัวใจคือการออกแบบที่ชัดเจนว่า "เปลี่ยนอะไร" "สังเกตผลอะไร" และ "ควบคุมอะไรให้เหมือนกัน"</p>
+        </div>
+
+         <!-- Slide 9: Type 3 - Invention -->
+        <div class="slide" id="slide-9">
+            <h2>3. โครงงานประเภทสิ่งประดิษฐ์ (Invention/Development Project)</h2>
+             <div class="illustration invention-icon">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="20" y="20" width="60" height="60" rx="10"/>
+                    <circle class="accent-shape" cx="50" cy="50" r="15"/>
+                    <path class="lines" d="M50 35 V15 M35 50 H15 M65 50 H85 M50 65 V85"/>
+                    <text class="text" x="50" y="50">Idea</text>
+                 </svg>
+            </div>
+             <h3>ลักษณะสำคัญ:</h3>
+            <ul>
+                <li><strong>ผลลัพธ์:</strong> สร้างหรือพัฒนาสิ่งใหม่ หรือปรับปรุงของเดิมให้ดีขึ้น</li>
+                <li><strong>ชิ้นงาน:</strong> อาจเป็นอุปกรณ์, เครื่องมือ, โมเดล, โปรแกรม, หรือวิธีการ</li>
+                <li><strong>กระบวนการ:</strong> ออกแบบ, สร้าง, ทดสอบ, ปรับปรุง</li>
+                <li><strong>หลักการ:</strong> นำความรู้ทางวิทยาศาสตร์/เทคโนโลยี มาประยุกต์ใช้</li>
+                <li><strong>เป้าหมาย:</strong> แก้ปัญหา, อำนวยความสะดวก, สร้างประโยชน์</li>
+            </ul>
+            <p>เน้นความคิดสร้างสรรค์และการนำความรู้มาใช้งานจริง</p>
+        </div>
+
+         <!-- Slide 10: Type 3 - Invention Examples -->
+        <div class="slide" id="slide-10">
+            <h2>ตัวอย่างโครงงานประเภทสิ่งประดิษฐ์</h2>
+             <ul>
+                <li>เครื่องดักยุงจากพัดลมและขวดพลาสติก</li>
+                <li>อุปกรณ์ปลูกพืชไร้ดิน (Hydroponics) ขนาดเล็กสำหรับบ้าน</li>
+                <li>เครื่องวัดปริมาณน้ำฝนแบบดิจิทัลอย่างง่าย</li>
+                <li>ระบบแจ้งเตือนเมื่อถังขยะเต็มอัตโนมัติ</li>
+                <li>การพัฒนาแอปพลิเคชันบันทึกการใช้พลังงานในบ้าน</li>
+                <li>ไม้กวาดอัจฉริยะที่ดูดฝุ่นได้</li>
+            </ul>
+             <p>ต้องสามารถแสดงให้เห็นถึง "ชิ้นงาน" หรือ "ระบบ" ที่ทำงานได้จริง</p>
+        </div>
+
+        <!-- Slide 11: Type 4 - Theoretical -->
+        <div class="slide" id="slide-11">
+            <h2>4. โครงงานประเภททฤษฎี (Theoretical/Modeling Project)</h2>
+            <div class="illustration theoretical-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="main-shape" x="10" y="10" width="80" height="80" rx="10"/>
+                    <circle class="accent-shape" cx="30" cy="30" r="10"/>
+                    <circle class="accent-shape" cx="70" cy="30" r="10"/>
+                    <circle class="accent-shape" cx="30" cy="70" r="10"/>
+                    <circle class="accent-shape" cx="70" cy="70" r="10"/>
+                    <line class="lines" x1="30" y1="30" x2="70" y2="70"/>
+                    <line class="lines" x1="70" y1="30" x2="30" y2="70"/>
+                     <text class="text" x="50" y="50" font-size="30px">Σ</text>
+                 </svg>
+            </div>
+             <h3>ลักษณะสำคัญ:</h3>
+            <ul>
+                <li><strong>การศึกษา:</strong> เน้นการค้นคว้า รวบรวม วิเคราะห์ข้อมูลทาง **ทฤษฎี หรือ แนวคิด**</li>
+                <li><strong>ผลลัพธ์:</strong> อาจเป็นการสร้าง **แบบจำลอง (Model)** เชิงคณิตศาสตร์ คอมพิวเตอร์ หรือเชิงแนวคิด</li>
+                <li><strong>วิธีการ:</strong> การวิเคราะห์เอกสาร, การคำนวณ, การใช้โปรแกรมคอมพิวเตอร์เพื่อจำลอง</li>
+                <li><strong>การทดลองจริง:</strong> ไม่เน้นการทดลองในห้องปฏิบัติการ หรือเก็บข้อมูลภาคสนาม</li>
+                <li><strong>วัตถุประสงค์:</strong> อธิบายปรากฏการณ์, ทำนายผล, สร้างทฤษฎีใหม่, พัฒนาแบบจำลอง</li>
+            </ul>
+            <p>มักเกี่ยวข้องกับแนวคิดเชิงนามธรรม และต้องการความรู้ความเข้าใจในทฤษฎีที่ลึกซึ้ง</p>
+             <p><em>ในระดับ ม.ต้น อาจเป็นการศึกษาเปรียบเทียบแนวคิด หรือสร้างแบบจำลองเชิงกายภาพอย่างง่ายๆ เพื่ออธิบายทฤษฎี</em></p>
+        </div>
+
+        <!-- Slide 12: Type 4 - Theoretical Examples -->
+        <div class="slide" id="slide-12">
+            <h2>ตัวอย่างโครงงานประเภททฤษฎี</h2>
+             <ul>
+                <li>การศึกษาเปรียบเทียบแบบจำลองระบบสุริยะที่แตกต่างกันในอดีต</li>
+                <li>การวิเคราะห์ทฤษฎีเกี่ยวกับแรงโน้มถ่วงในเอกภพ</li>
+                <li>การสร้างโปรแกรมจำลองการกระจายตัวของประชากรเชื้อแบคทีเรีย</li>
+                <li>การศึกษาความเป็นไปได้ทางทฤษฎีของเครื่องยนต์ที่ใช้พลังงานรูปแบบใหม่</li>
+            </ul>
+             <p>มักเกี่ยวข้องกับการทำงานกับ "ความคิด" "สมการ" หรือ "ข้อมูลเชิงนามธรรม"</p>
+        </div>
+
+         <!-- Slide 13: Overlap -->
+        <div class="slide" id="slide-13">
+            <h2>ประเภทโครงงานที่อาจมีลักษณะผสมผสาน</h2>
+            <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <circle class="main-shape" cx="40" cy="50" r="30" opacity="0.7"/>
+                     <circle class="accent-shape" cx="60" cy="50" r="30" opacity="0.7"/>
+                     <text class="text" x="50" y="50">Mix</text>
+                 </svg>
+            </div>
+            <p>จำไว้ว่า การจำแนกนี้เป็นเพียงกรอบ! โครงงานจำนวนมากมีลักษณะผสมกัน เช่น:</p>
+            <ul>
+                <li>**สิ่งประดิษฐ์ (+ทดลอง):** สร้างเครื่องกรองน้ำ แล้วต้องทดลองวัดประสิทธิภาพ</li>
+                <li>**สำรวจ (+ทดลอง):** สำรวจพบว่าพืชริมถนนโตไม่ดี แล้วทดลองหาสารที่อาจช่วยบำรุง</li>
+                <li>**สำรวจ (+สิ่งประดิษฐ์):** สำรวจปัญหาการทิ้งขยะไม่เป็นที่ แล้วสร้างอุปกรณ์/ป้ายรณรงค์ที่ออกแบบพิเศษ</li>
+                <li>**ทฤษฎี (+การสร้างแบบจำลอง):** ศึกษาทฤษฎีการเกิดคลื่นสึนามิ แล้วสร้างโมเดลจำลอง (อาจใช้การทดลองในถาดน้ำ)</li>
+            </ul>
+            <p>สิ่งสำคัญคือการระบุ **แนวทางหลัก** ของโครงงาน และอธิบายได้อย่างชัดเจน</p>
+        </div>
+
+         <!-- Slide 14: Choosing a Type -->
+        <div class="slide" id="slide-14">
+            <h2>แนวทางการเลือกประเภทโครงงานเบื้องต้น</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="20" y="20" width="60" height="60" rx="10"/>
+                     <path class="lines" d="M50 20 V80"/>
+                     <circle class="accent-shape" cx="50" cy="50" r="15"/>
+                     <text class="text" x="50" y="15">Choose</text>
+                 </svg>
+            </div>
+            <p>เมื่อนักเรียนมีปัญหาหรือหัวข้อที่สนใจ ลองถามตัวเอง:</p>
+            <ul>
+                <li>"ฉันต้องการแค่ **รวบรวมและอธิบาย** สิ่งที่มีอยู่หรือไม่?" -> **สำรวจ**</li>
+                <li>"ฉันต้องการ **ทดสอบว่า 'ถ้าทำแบบนี้' แล้ว 'ผลจะเป็นอย่างไร'** โดยมีการควบคุมปัจจัยอื่นหรือไม่?" -> **ทดลอง**</li>
+                <li>"ฉันต้องการ **สร้างอะไรบางอย่าง** ที่ใช้งานได้จริง เพื่อแก้ปัญหาหรืออำนวยความสะดวกหรือไม่?" -> **สิ่งประดิษฐ์**</li>
+                <li>"ฉันสนใจที่จะ **ศึกษาแนวคิด/ทฤษฎี** หรือ **สร้างแบบจำลอง** เพื่ออธิบายสิ่งต่างๆ หรือไม่?" -> **ทฤษฎี**</li>
+            </ul>
+            <p>พิจารณาร่วมกับความสนใจ ทรัพยากร และความรู้พื้นฐานของกลุ่ม</p>
+        </div>
+
+        <!-- Slide 15: Live Activity -->
+        <div class="slide" id="slide-15">
+            <h2>กิจกรรม: อภิปรายร่วมกัน (จำแนกประเภท)</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="15" y="15" width="70" height="70" rx="10"/>
+                     <circle class="accent-shape" cx="35" cy="40" r="12"/>
+                     <circle class="accent-shape" cx="65" cy="40" r="12"/>
+                     <path class="lines" d="M35 60 C40 70 60 70 65 60"/>
+                     <text class="text" x="50" y="15">Talk</text>
+                 </svg>
+            </div>
+            <p>เรามาลองพิจารณาตัวอย่างโครงงานเหล่านี้ แล้วช่วยกันจำแนกประเภท พร้อมให้เหตุผลประกอบ</p>
+            <ul>
+                <li>การศึกษาปริมาณออกซิเจนที่ละลายในน้ำจากแหล่งน้ำต่าง ๆ ในชุมชน</li>
+                <li>การประดิษฐ์ชุดตรวจจับความเค็มของน้ำทะเลแบบง่ายๆ</li>
+                <li>การทดลองเปรียบเทียบประสิทธิภาพของสารไล่แมลงจากพืช 3 ชนิด</li>
+                <li>การศึกษาประวัติและวิวัฒนาการของกล้องโทรทรรศน์</li>
+            </ul>
+             <p>ให้นักเรียนเสนอความคิดเห็นและเหตุผลอย่างอิสระ อาจารย์คอยชี้แนะ</p>
+        </div>
+
+        <!-- Slide 16: Student Activity Link -->
+        <div class="slide" id="slide-16">
+            <h2>กิจกรรมในชั้นเรียน: ฝึกปฏิบัติออนไลน์</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="10" y="20" width="80" height="60" rx="10"/>
+                     <line class="lines" x1="10" y1="25" x2="90" y2="25"/>
+                     <circle class="accent-shape" cx="50" cy="55" r="15"/>
+                     <text class="text" x="50" y="55">Web</text>
+                 </svg>
+            </div>
+            <p>เพื่อทดสอบความเข้าใจของนักเรียนแต่ละคนเกี่ยวกับชนิดของโครงงานวิทยาศาสตร์</p>
+            <p>ให้นักเรียนเปิดคอมพิวเตอร์/แท็บเล็ต/โทรศัพท์มือถือ แล้วเข้าสู่หน้าเว็บกิจกรรมที่อาจารย์กำหนด</p>
+            <div class="activity-link">
+                <!-- ** สำคัญ: แทนที่ URL นี้ด้วย URL ของหน้าเว็บกิจกรรมของนักเรียนที่คุณ Deploy ไว้ ** -->
+                <a href="YOUR_STUDENT_ACTIVITY_PAGE_URL_HERE" target="_blank">คลิกที่นี่เพื่อทำกิจกรรมออนไลน์ (เปิดหน้าใหม่)</a>
+                <p style="margin-top: 12px; font-size: 1.1em; color: #555; font-weight: normal;">(เมื่อเข้าหน้าเว็บแล้ว อย่าลืมกรอกเลขประจำตัวนักเรียนก่อนเริ่มทำกิจกรรมนะครับ)</p>
+            </div>
+             <p style="margin-top: 35px;">อาจารย์จะให้เวลาประมาณ 15-20 นาที ในการทำกิจกรรมนี้<br>หากมีข้อสงสัยในการใช้งาน สามารถสอบถามอาจารย์ได้</p>
+        </div>
+
+        <!-- Slide 17: Q&A / Summary -->
+        <div class="slide" id="slide-17">
+            <h2>สรุปและถาม-ตอบ</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="15" y="20" width="70" height="60" rx="10"/>
+                     <path class="lines" d="M25 35 L50 65 L75 35"/>
+                     <text class="text" x="50" y="85" font-size="14px">สรุป</text>
+                 </svg>
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <circle class="main-shape" cx="50" cy="50" r="40"/>
+                     <path class="accent-shape" d="M50 30 V50 H70 M50 50 V70 M50 30 A20 20 0 1 1 70 50 L50 50 Z"/>
+                      <text class="text" x="50" y="50" font-size="40px">?</text>
+                 </svg>
+            </div>
+            <h3>สรุปประเด็นสำคัญ:</h3>
+            <ul>
+                <li>โครงงานวิทยาศาสตร์มี 4 ประเภทหลัก: สำรวจ, ทดลอง, สิ่งประดิษฐ์, ทฤษฎี</li>
+                <li>แต่ละประเภทมีจุดเน้นและวิธีการดำเนินงานที่แตกต่างกัน</li>
+                <li>การจำแนกประเภทช่วยให้วางแผนและดำเนินงานโครงงานได้อย่างมีระบบ</li>
+                <li>บางโครงงานอาจมีลักษณะผสมผสานกันได้</li>
+            </ul>
+            <p style="margin-top: 30px;">นักเรียนมีคำถาม ข้อสงสัย หรือประเด็นที่ต้องการแลกเปลี่ยนเพิ่มเติมเกี่ยวกับชนิดของโครงงานวิทยาศาสตร์หรือไม่?</p>
+             <p>สามารถติดต่ออาจารย์ได้ทางอีเมล: chawadol_s@fangwit.ac.th</p>
+        </div>
+
+        <!-- Slide 18: Next Steps -->
+        <div class="slide" id="slide-18">
+            <h2>บทเรียนครั้งต่อไป: การวางแผนและออกแบบโครงงาน</h2>
+             <div class="illustration general">
+                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <rect class="main-shape" x="15" y="20" width="70" height="60" rx="10"/>
+                     <path class="lines" d="M25 70 L50 40 L75 70" fill="none"/>
+                      <polygon class="accent-shape" points="50,40 45,50 55,50"/>
+                     <text class="text" x="50" y="15">Next</text>
+                 </svg>
+            </div>
+            <p>หลังจากที่นักเรียนพอจะเข้าใจชนิดของโครงงานแล้ว บทเรียนถัดไปเราจะเริ่มเข้าสู่ **ขั้นตอนการวางแผน** อย่างละเอียด</p>
+            <p>เราจะเรียนรู้และฝึกปฏิบัติ:</p>
+            <ul>
+                <li>การระบุและกำหนดขอบเขตปัญหาให้ชัดเจน</li>
+                <li>การตั้งคำถามการวิจัย/คำถามโครงงาน</li>
+                <li>การกำหนดวัตถุประสงค์ของโครงงาน</li>
+                <li>การศึกษาข้อมูลและวรรณกรรมที่เกี่ยวข้อง (เบื้องต้น)</li>
+                <li>การตั้งสมมติฐาน (กรณีโครงงานทดลอง)</li>
+                <li>การระบุและนิยามตัวแปร</li>
+                <li>การออกแบบวิธีการดำเนินงาน (จะทำอย่างไร? ใช้อุปกรณ์อะไร?)</li>
+            </ul>
+             <p style="margin-top: 30px; font-size: 1.3em; font-weight: bold;">**สิ่งสำคัญที่ต้องเตรียมตัว:** ขอให้นักเรียนแต่ละคน/แต่ละกลุ่ม (ถ้ามีการแบ่งกลุ่มแล้ว) เริ่มคิดถึง **ปัญหาหรือหัวข้อ** ที่ตนเองสนใจอย่างจริงจัง เพื่อที่เราจะได้นำมาพัฒนาต่อในชั้นเรียนครับ!</p>
+        </div>
+
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button id="prevBtn" disabled>ย้อนกลับ</button>
+        <button id="nextBtn">ถัดไป</button>
+    </div>
+
+    <footer>
+        <p>สร้างจากประมวลผลรายวิชา วิทยาศาสตร์เพิ่มเติม ม. 2 (ว21101) ภาคเรียนที่ 2 / 2568</p>
+         <p>ผู้สอน: อ. ชวดล ศรีบุญพิมพ์สวย</p>
+    </footer>
+
+
+    <!-- รวม JavaScript Script ตรงนี้ -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlideIndex = 0;
+
+        // Function to show a specific slide
+        function showSlide(index) {
+            // Hide all slides by removing the 'active' class
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show the selected slide by adding the 'active' class
+            if (slides[index]) {
+                slides[index].classList.add('active');
+                currentSlideIndex = index;
+            }
+
+            // Update button states (disabled when at the beginning or end)
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+
+            // Ensure only one keyboard listener is active to prevent duplicates
+            document.removeEventListener('keydown', handleKeyPress);
+            document.addEventListener('keydown', handleKeyPress);
+        }
+
+        // Handle Arrow Key Presses and Spacebar for navigation
+        function handleKeyPress(event) {
+             // Check if a text input, select, or textarea is focused - prevent navigation if typing
+            if (document.activeElement &&
+                (document.activeElement.tagName === 'INPUT' ||
+                 document.activeElement.tagName === 'TEXTAREA' ||
+                 document.activeElement.tagName === 'SELECT' ||
+                 document.activeElement.isContentEditable)) { // Also check for contenteditable elements
+                return;
+            }
+
+            if (event.key === 'ArrowRight' || event.key === ' ') { // Space or Right Arrow
+                if (!nextBtn.disabled) {
+                    showSlide(currentSlideIndex + 1);
+                    event.preventDefault(); // Prevent default spacebar action (scrolling) and arrow key scrolling
+                }
+            } else if (event.key === 'ArrowLeft') { // Left Arrow
+                 if (!prevBtn.disabled) {
+                    showSlide(currentSlideIndex - 1);
+                    event.preventDefault(); // Prevent default arrow key action (scrolling)
+                }
+            }
+        }
+
+
+        // Event Listeners for navigation buttons
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlideIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlideIndex + 1);
+        });
+
+        // Initialize: Show the first slide and set the activity link when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(0);
+
+            // ** สำคัญ: ตั้งค่า URL หน้ากิจกรรมของนักเรียนที่นี่ **
+            // ค้นหา tag <a> ใน slide-16 และแก้ไข href
+            const activityLink = document.querySelector('#slide-16 .activity-link a');
+            // แทนที่ 'YOUR_STUDENT_ACTIVITY_PAGE_URL_HERE' ด้วย URL จริงของหน้ากิจกรรมนักเรียน
+            activityLink.href = 'YOUR_STUDENT_ACTIVITY_PAGE_URL_HERE'; // <--- แก้ตรงนี้!
+            // ตัวอย่าง: activityLink.href = 'https://[your-github-username].github.io/[repository-name]/';
+         });
+
+
+    </script>
+
+</body>
+</html>
