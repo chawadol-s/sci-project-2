@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สไลด์การสอน - วิทยาศาสตร์เพิ่มเติม ม.2 (โครงงานวิทยาศาสตร์)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8; /* Soft background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide {
+            background-color: #ffffff;
+            border-radius: 10px; /* Slightly more rounded corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            margin: 25px auto; /* More margin */
+            padding: 40px;
+            max-width: 950px; /* Slightly wider */
+            width: 90%;
+            min-height: 500px; /* Increased height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 8px solid #0077B6; /* Accent border top */
+        }
+
+        .slide h1, .slide h2 {
+            color: #023E7D; /* Darker blue for headings */
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700; /* Bold headings */
+        }
+        .slide h1 { font-size: 2.8em; } /* Larger H1 */
+        .slide h2 { font-size: 2em; }   /* Larger H2 */
+        .slide h3 {
+             color: #0077B6; /* Primary blue */
+             margin-top: 25px; /* More space above h3 */
+             margin-bottom: 10px;
+             font-weight: 700;
+        }
+
+
+        .slide p {
+            font-size: 1.15em; /* Slightly larger text */
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+         .slide p.center { text-align: center; }
+
+        .slide ul {
+            font-size: 1.15em; /* Slightly larger text */
+            margin-bottom: 15px;
+            padding-left: 30px; /* More padding */
+        }
+
+        .slide li {
+            margin-bottom: 10px;
+        }
+
+        .slide .activity-box {
+            border: 2px dashed #0077B6; /* Blue dashed border */
+            padding: 25px; /* More padding */
+            margin-top: 30px; /* More space above */
+            background-color: #eef7ff; /* Very light blue background */
+            text-align: center;
+            font-weight: bold;
+            color: #023E7D; /* Dark blue text */
+            border-radius: 8px;
+        }
+
+        .slide .activity-box h3 {
+            color: #0077B6; /* Primary blue for activity heading */
+            margin-top: 0;
+        }
+
+         /* Styling for SVG icons */
+        .slide svg {
+            display: block;
+            margin: 25px auto; /* More margin */
+            max-width: 180px; /* Larger SVG */
+            height: auto;
+        }
+
+        .slide .svg-container {
+             display: flex;
+             justify-content: space-around;
+             align-items: center;
+             margin: 25px 0; /* More margin */
+             flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .slide .svg-container svg {
+            margin: 10px 15px; /* Space between SVGs */
+            max-width: 120px; /* Max width within container */
+        }
+
+        .slide .footer {
+            position: absolute;
+            bottom: 15px; /* More space from bottom */
+            left: 40px;
+            right: 40px;
+            font-size: 0.95em; /* Slightly larger footer text */
+            color: #777;
+            text-align: right;
+        }
+        .slide .footer span {
+            display: inline-block;
+        }
+
+        /* Specific slide backgrounds or styles */
+        #slide1 {
+            background: linear-gradient(to bottom right, #e1f5fe, #b3e5fc); /* Softer blue gradient */
+            border-top-color: #023E7D; /* Darker accent */
+            color: #01579b;
+        }
+         #slide1 h1, #slide1 h2 { color: #023E7D; margin-bottom: 15px; }
+         #slide1 p { font-size: 1.4em; color: #0056b3; } /* Slightly larger and bluer text */
+
+        #slide4 .activity-box {
+            background-color: #fff9eb; /* Very light orange/yellow */
+            border-color: #fbc02d; /* Darker yellow/orange */
+            color: #f57f17; /* Orange-ish */
+        }
+         #slide4 .activity-box h3 { color: #f57f17; }
+
+
+        #slide12 .svg-container {
+            max-width: 90%; /* Fit in slide */
+            margin: 25px auto;
+        }
+         #slide12 .svg-container svg { width: 100px; height: 100px; } /* Larger icons in this section */
+
+
+         /* Adjustments for smaller screens */
+         @media (max-width: 768px) {
+             .slide {
+                 padding: 30px;
+                 min-height: 400px;
+             }
+             .slide h1 { font-size: 2em; }
+             .slide h2 { font-size: 1.5em; }
+             .slide p, .slide ul { font-size: 1em; }
+             .slide svg { max-width: 120px; }
+             .slide .svg-container svg { max-width: 80px; margin: 8px;}
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="slide" id="slide1">
+        <h1>ยินดีต้อนรับสู่<br>รายวิชาวิทยาศาสตร์เพิ่มเติม 3</h1>
+        <h2>โครงงานวิทยาศาสตร์กับคุณภาพชีวิต</h2>
+        <p>รหัสวิชา ว21101 | ชั้นมัธยมศึกษาปีที่ 2</p>
+        <p>ภาคเรียนที่ 2 / ปีการศึกษา 2568</p>
+        <p>อาจารย์ผู้สอน: ชวดล ศรีบุญพิมพ์สวย</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="#b3e5fc"/>
+            <path d="M30 60 L50 30 L70 60 Z" fill="#023E7D"/>
+            <circle cx="50" cy="65" r="12" fill="#0077B6"/>
+            <rect x="45" y="77" width="10" height="15" fill="#023E7D"/>
+            <circle cx="50" cy="50" r="28" stroke="#0077B6" stroke-width="4" fill="none"/>
+            <circle cx="50" cy="50" r="18" fill="#A9E5D5"/>
+            <path d="M50 50 L68 42 M50 50 L42 68 M50 50 L62 68" stroke="#E1F5FE" stroke-width="3"/>
+        </svg>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>โครงงานวิทยาศาสตร์กับคุณภาพชีวิต คืออะไร?</h2>
+        <p>รายวิชานี้ไม่เหมือนวิชาวิทยาศาสตร์พื้นฐานทั่วไป ที่เราเรียนทฤษฎีหรือทดลองตามขั้นตอนที่มีคนกำหนดไว้แล้วครับ</p>
+        <p>ในวิชานี้... นักเรียนทุกคนจะได้เป็น <strong>นักวิทยาศาสตร์ตัวน้อย!</strong></p>
+        <ul>
+            <li>นักเรียนจะได้ <strong>ตั้งคำถาม</strong> หรือ <strong>หาปัญหา</strong> ที่นักเรียนสนใจเอง</li>
+            <li>นักเรียนจะได้ <strong>ออกแบบวิธีการ</strong> เพื่อหาคำตอบหรือแก้ปัญหานั้น</li>
+            <li>นักเรียนจะได้ <strong>ลงมือทำ</strong> และ <strong>เก็บข้อมูล</strong> ด้วยตัวเอง</li>
+            <li>นักเรียนจะได้ <strong>วิเคราะห์</strong> สิ่งที่ค้นพบ</li>
+            <li>และนักเรียนจะได้ <strong>สื่อสาร</strong> ผลงานของนักเรียนให้ผู้อื่นเข้าใจ</li>
+        </ul>
+        <p class="center">และที่สำคัญ... เราจะเน้นโครงงานที่เชื่อมโยงกับ <strong>"คุณภาพชีวิต"</strong> ของนักเรียน ชุมชน หรือสิ่งแวดล้อมรอบตัวเราครับ</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 C35 10 20 25 20 40 C20 60 50 90 50 90 C50 90 80 60 80 40 C80 25 65 10 50 10Z" fill="#F08080"/>
+            <circle cx="50" cy="40" r="18" fill="#fff"/>
+            <path d="M50 30 A12 12 0 0 1 50 50 A12 12 0 0 0 50 30Z" fill="#FFB347"/>
+            <circle cx="50" cy="40" r="10" fill="#fff"/>
+             <path d="M18 68 L35 85 L50 68" fill="none" stroke="#4CAF50" stroke-width="6"/>
+             <path d="M50 68 L65 85 L82 68" fill="none" stroke="#2196F3" stroke-width="6"/>
+             <rect x="30" y="78" width="40" height="15" rx="6" ry="6" fill="#B0BEC5"/>
+        </svg>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+     <div class="slide">
+        <h2>ทำไมต้องเรียนเรื่องโครงงานวิทยาศาสตร์?</h2>
+        <p>การทำโครงงานวิทยาศาสตร์ ช่วยพัฒนานักเรียนในหลายๆ ด้านที่สำคัญมากๆ ครับ</p>
+        <ul>
+            <li><strong>ทักษะการคิด:</strong> ฝึกคิดวิเคราะห์ปัญหา คิดสร้างสรรค์วิธีแก้ปัญหา</li>
+            <li><strong>ทักษะการทำ:</strong> ฝึกวางแผน ลงมือปฏิบัติ ทดลอง แก้ปัญหาเฉพาะหน้า</li>
+            <li><strong>ทักษะการแก้ปัญหา:</strong> เรียนรู้ที่จะเผชิญปัญหาในกระบวนการและหาทางออก</li>
+            <li><strong>ทักษะการทำงานร่วมกับผู้อื่น:</strong> ส่วนใหญ่โครงงานจะทำเป็นกลุ่ม ฝึกแบ่งงาน รับฟังความคิดเห็น</li>
+            <li><strong>ทักษะการสื่อสาร:</strong> ฝึกเขียนรายงาน และนำเสนอผลงานให้ผู้อื่นเข้าใจ</li>
+        </ul>
+        <p class="center">ทักษะเหล่านี้ ไม่ได้ใช้แค่ในวิชาวิทยาศาสตร์ แต่สำคัญต่อการเรียน การทำงาน และการใช้ชีวิตในอนาคตของนักเรียนทุกคนครับ!</p>
+         <div class="svg-container">
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 A45 45 0 0 1 50 90 A45 45 0 0 1 50 10 Z" fill="#ffecb3"/>
+                <path d="M50 10 A45 45 0 0 0 50 90" fill="none" stroke="#fbc02d" stroke-width="5"/>
+                <circle cx="50" cy="40" r="12" fill="#fbc02d"/>
+                <path d="M40 55 L50 70 L60 55" stroke="#fbc02d" stroke-width="5" fill="none"/>
+                <path d="M45 78 H55 V88 H45 Z" fill="#fbc02d"/>
+            </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="80" height="80" rx="12" ry="12" fill="#c8e6c9"/>
+                <circle cx="30" cy="30" r="12" fill="#4caf50"/>
+                 <circle cx="70" cy="30" r="12" fill="#4caf50"/>
+                 <circle cx="50" cy="70" r="12" fill="#4caf50"/>
+                 <path d="M30 42 L50 63 L70 42" stroke="#4caf50" stroke-width="6" fill="none"/>
+            </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 20 H85 V85 H15 Z" fill="#bbdefb"/>
+                <circle cx="50" cy="50" r="35" fill="#2196F3"/>
+                 <path d="M50 25 V75 M25 50 H75" stroke="#e3f2fd" stroke-width="6"/>
+            </svg>
+         </div>
+
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide" id="slide4">
+        <h2>กิจกรรม: นักเรียนรู้จัก "โครงงานวิทยาศาสตร์" แค่ไหน?</h2>
+        <div class="activity-box">
+            <h3>ลองคิด... แล้วแชร์กัน!</h3>
+            <p>นักเรียนเคยได้ยิน เคยเห็น หรือรู้จัก <strong>"โครงงานวิทยาศาสตร์"</strong> อะไรบ้าง?</p>
+            <p>(อาจเป็นโครงงานที่เคยทำเองตอนประถม/ม.1, โครงงานรุ่นพี่, โครงงานที่เห็นในข่าว/ทีวี, หรือโครงการ/งานวิจัยทางวิทยาศาสตร์ต่างๆ ที่ดูเหมือนเป็นการทำงานแบบโครงงานก็ได้)</p>
+            <p>ไม่ต้องกังวลว่าต้องถูก 100% ครับ แค่ลองนึก ลองแชร์</p>
+        </div>
+        <p class="center">อาจารย์จะชวนนักเรียนพูดคุย แลกเปลี่ยนไอเดียกันครับ</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#ffecb3"/>
+            <path d="M30 40 Q40 30 50 35 T70 40 T50 50 T30 60 T50 70 T70 60 T50 50 Z" fill="#ff9800"/>
+             <circle cx="50" cy="50" r="18" fill="#fff"/>
+             <path d="M40 50 H60 M50 40 V60" stroke="#f57f17" stroke-width="4"/>
+             <path d="M25 35 Q35 20 50 20 Q65 20 75 35" stroke="#fbc02d" stroke-width="4" fill="none"/>
+             <path d="M25 65 Q35 80 50 80 Q65 80 75 65" stroke="#fbc02d" stroke-width="4" fill="none"/>
+        </svg>
+         <div class="footer"><span>คาบเรียนที่ 1 | กิจกรรม</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>จากที่นักเรียนแชร์... โครงงานวิทยาศาสตร์ คือ?</h2>
+        <p>จากตัวอย่างต่างๆ ที่นักเรียนได้พูดคุยกัน พอจะสรุปความหมายเบื้องต้นได้ว่า...</p>
+        <p class="center"><strong>โครงงานวิทยาศาสตร์</strong> คือ กิจกรรมการศึกษาค้นคว้าทางวิทยาศาสตร์ที่<br>นักเรียนเป็นผู้ริเริ่ม วางแผน และดำเนินการด้วยตนเอง</p>
+        <p>โดยมีขั้นตอนที่เป็นระบบ:</p>
+        <ol>
+            <li>เริ่มจากปัญหา หรือความสงสัย (Question/Problem)</li>
+            <li>ตั้งสมมติฐาน (Hypothesis) - คาดเดาคำตอบล่วงหน้า</li>
+            <li>ออกแบบวิธีค้นหาคำตอบ (Experiment Design)</li>
+            <li>ลงมือทำ และเก็บข้อมูล (Implementation & Data Collection)</li>
+            <li>วิเคราะห์ข้อมูล และสรุปผล (Analysis & Conclusion)</li>
+            <li>นำเสนอผลงาน (Presentation)</li>
+        </ol>
+        <p>กระบวนการนี้จะช่วยให้นักเรียนได้คำตอบจากความสงสัยของตัวเองครับ</p>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+             <circle cx="50" cy="20" r="18" fill="#e1bee7"/>
+             <path d="M50 38 V50" stroke="#673AB7" stroke-width="4"/>
+             <rect x="25" y="50" width="50" height="25" fill="#e1bee7" rx="5" ry="5"/>
+             <path d="M50 75 V88" stroke="#673AB7" stroke-width="4"/>
+             <circle cx="50" cy="88" r="12" fill="#e1bee7"/>
+             <path d="M50 20 Q65 35 65 55 Q65 75 50 88" stroke="#673AB7" stroke-width="3" fill="none"/>
+             <path d="M50 20 Q35 35 35 55 Q35 75 50 88" stroke="#673AB7" stroke-width="3" fill="none"/>
+             <text x="50" y="25" text-anchor="middle" fill="#673AB7" font-size="12" font-weight="bold">?</text>
+              <text x="50" y="65" text-anchor="middle" fill="#673AB7" font-size="12" font-weight="bold">Do</text>
+               <text x="50" y="92" text-anchor="middle" fill="#673AB7" font-size="12" font-weight="bold">!</text>
+         </svg>
+
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>ภาพรวมการเดินทางในรายวิชานี้ (20 สัปดาห์)</h2>
+        <p>ในเทอมนี้ เราจะค่อยๆ เดินทางไปทีละขั้นตอน เพื่อให้โครงงานวิทยาศาสตร์ของนักเรียนสำเร็จเป็นรูปเป็นร่างครับ</p>
+        <ul>
+            <li><strong>ช่วงแรก (สัปดาห์ 1-3):</strong> ทำความรู้จักโครงงาน คืออะไร มีกี่แบบ ขั้นตอนภาพรวม</li>
+            <li><strong>ช่วงกลาง (สัปดาห์ 4-10):</strong> <strong>การวางแผน!</strong> หาสิ่งที่สนใจ กำหนดปัญหา ตั้งคำถาม ออกแบบวิธีทำ และเขียน "เค้าโครงโครงงาน" (Project Proposal)</li>
+            <li><strong>ช่วงปฏิบัติ (สัปดาห์ 11-14):</strong> <strong>ลงมือทำจริง!</strong> ทดลอง เก็บข้อมูลตามแผนที่วางไว้</li>
+            <li><strong>ช่วงสรุป (สัปดาห์ 15-18):</strong> <strong>วิเคราะห์!</strong> นำข้อมูลมาแปลผล สรุปสิ่งที่ค้นพบ และเขียน "รายงานฉบับสมบูรณ์"</li>
+            <li><strong>ช่วงสุดท้าย (สัปดาห์ 19-20):</strong> <strong>นำเสนอ!</strong> เตรียมตัว จัดแสดงผลงาน และนำเสนอสิ่งที่นักเรียนทำมาตลอดเทอม</li>
+        </ul>
+        <p class="center">ทุกขั้นตอนสำคัญหมดเลยนะครับ!</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 90 H90" stroke="#b0bec5" stroke-width="5"/>
+            <circle cx="10" cy="90" r="6" fill="#3f51b5"/>
+             <circle cx="30" cy="70" r="6" fill="#3f51b5"/>
+             <circle cx="50" cy="50" r="6" fill="#3f51b5"/>
+             <circle cx="70" cy="30" r="6" fill="#3f51b5"/>
+             <circle cx="90" cy="10" r="6" fill="#3f51b5"/>
+             <path d="M10 90 L30 70 L50 50 L70 30 L90 10" stroke="#5c6bc0" stroke-width="4" fill="none"/>
+             <text x="10" y="96" text-anchor="middle" fill="#333" font-size="11">Idea</text>
+             <text x="30" y="76" text-anchor="middle" fill="#333" font-size="11">Plan</text>
+             <text x="50" y="56" text-anchor="middle" fill="#333" font-size="11">Do</text>
+             <text x="70" y="36" text-anchor="middle" fill="#333" font-size="11">Analyze</text>
+             <text x="90" y="16" text-anchor="middle" fill="#333" font-size="11">Present</text>
+         </svg>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>ผลการเรียนรู้ที่คาดหวัง (เรียนจบแล้วนักเรียนจะทำอะไรได้บ้าง)</h2>
+        <p>เมื่อสิ้นสุดการเรียนรายวิชานี้ นักเรียนจะมีความสามารถตามนี้ครับ:</p>
+        <ul>
+            <li>อธิบายความหมายและจำแนกชนิดของโครงงานวิทยาศาสตร์ได้</li>
+            <li>บอกและทำตามขั้นตอนการทำโครงงานวิทยาศาสตร์ได้</li>
+            <li>ระบุปัญหา ตั้งสมมติฐาน และกำหนดตัวแปรต่างๆ จากสถานการณ์ได้</li>
+            <li>ออกแบบวิธีการทดลอง และเขียนเค้าโครงโครงงานได้</li>
+            <li>ลงมือทำ เก็บข้อมูล วิเคราะห์ และสรุปผลได้</li>
+            <li>เขียนรายงานโครงงานวิทยาศาสตร์ได้</li>
+            <li>นำเสนอและจัดแสดงผลงานโครงงานของตัวเองได้</li>
+        </ul>
+        <p class="center">เป้าหมายคือ ให้นักเรียนทำโครงงานวิทยาศาสตร์ "เป็น" ครับ!</p>
+         <div class="svg-container">
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#fff9c4"/>
+                <path d="M30 40 Q40 30 50 35 T70 40 T50 50 T30 60 T50 70 T70 60 T50 50 Z" fill="#fbc02d"/>
+                 <circle cx="50" cy="50" r="18" fill="#fff"/>
+                 <path d="M40 50 H60 M50 40 V60" stroke="#fbc02d" stroke-width="4"/>
+             </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 50 L45 75 L80 30" stroke="#81c784" stroke-width="6" fill="none"/>
+                 <circle cx="45" cy="75" r="12" fill="#4caf50"/>
+            </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#ffccbc"/>
+                 <path d="M50 20 V80 M20 50 H80" stroke="#ff5722" stroke-width="6"/>
+                 <circle cx="50" cy="50" r="12" fill="#ff5722"/>
+            </svg>
+         </div>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>เราจะเรียนรู้อย่างไรบ้าง?</h2>
+        <p>ในห้องเรียน เราจะใช้หลากหลายวิธีผสมผสานกันครับ เพื่อให้นักเรียนสนุกกับการเรียนรู้ และได้ลงมือทำจริง:</p>
+        <ul>
+            <li><strong>การบรรยาย:</strong> อาจารย์จะให้ข้อมูลพื้นฐานและอธิบายแนวคิดที่สำคัญ</li>
+            <li><strong>การปฏิบัติการ:</strong> นักเรียนจะได้ลงมือทำโครงงานจริงในห้องเรียนและนอกเวลาเรียน</li>
+            <li><strong>การนำเสนอ:</strong> นักเรียนจะได้ฝึกนำเสนอความคืบหน้าและผลงานของตัวเอง</li>
+            <li><strong>การอภิปราย/ระดมสมอง:</strong> เราจะพูดคุย แลกเปลี่ยนไอเดีย และช่วยกันแก้ปัญหา</li>
+            <li><strong>การเรียนรู้แบบร่วมมือ:</strong> ทำงานเป็นกลุ่ม ช่วยเหลือซึ่งกันและกัน</li>
+            <li><strong>การใช้สื่อและแหล่งเรียนรู้:</strong> ใช้ทั้งเอกสาร อินเทอร์เน็ต ห้องปฏิบัติการ หรือแหล่งเรียนรู้ในท้องถิ่น</li>
+        </ul>
+         <div class="svg-container">
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="80" height="80" rx="12" ry="12" fill="#f8bbd0"/>
+                <path d="M25 25 V75 H75 V25 Z" fill="#e91e63"/>
+                 <circle cx="50" cy="50" r="18" fill="#f8bbd0"/>
+                 <path d="M50 40 V60 M40 50 H60" stroke="#e91e63" stroke-width="4"/>
+            </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#e1bee7"/>
+                 <path d="M50 20 Q60 35 60 45 Q60 60 50 70 Q40 60 40 45 Q40 35 50 20 Z" fill="#9c27b0"/>
+                 <path d="M50 75 Q60 80 60 85 L50 95 L40 85 Q40 80 50 75 Z" fill="#9c27b0"/>
+            </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="20" width="70" height="45" rx="6" ry="6" fill="#b2ebf2"/>
+                 <line x1="15" y1="65" x2="85" y2="65" stroke="#00bcd4" stroke-width="4"/>
+                 <path d="M25 75 H75 V85 H25 Z" fill="#b2ebf2"/>
+                 <circle cx="50" cy="75" r="6" fill="#00bcd4"/>
+            </svg>
+         </div>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>การวัดและประเมินผล (คะแนนมาจากไหนบ้าง?)</h2>
+        <p>คะแนนในรายวิชานี้ 100% จะมาจากการทำงานและกระบวนการของนักเรียนตลอดภาคเรียนครับ</p>
+        <p>เราจะไม่มีการสอบกลางภาคหรือปลายภาคที่เป็นข้อสอบ แต่จะประเมินจากชิ้นงานต่างๆ ดังนี้ครับ:</p>
+        <ul>
+            <li>การมีส่วนร่วมและกระบวนการกลุ่ม: 10%</li>
+            <li>การวางแผนและเค้าโครงโครงงาน: 20%</li>
+            <li>การปฏิบัติการและเก็บข้อมูล: 15%</li>
+            <li>การวิเคราะห์และแปลความหมายข้อมูล: 15%</li>
+            <li>รายงานโครงงานวิทยาศาสตร์ฉบับสมบูรณ์: 20%</li>
+            <li>การนำเสนอและจัดแสดงผลงาน: 20%</li>
+        </ul>
+        <p><strong>รวม 100%</strong></p>
+        <p>นักเรียนต้องได้คะแนนรวม <strong>ตั้งแต่ 50% ขึ้นไป</strong> และผ่านเกณฑ์ขั้นต่ำในแต่ละส่วนที่กำหนด เพื่อผ่านรายวิชานี้ครับ</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#ffecb3"/>
+             <path d="M50 2 A48 48 0 0 1 98 50 L50 50 Z" fill="#ff9800"/> <!-- 25% roughly -->
+             <path d="M98 50 A48 48 0 0 1 50 98 L50 50 Z" fill="#ffb74d"/> <!-- 25% roughly -->
+              <path d="M50 98 A48 48 0 0 1 2 50 L50 50 Z" fill="#ffcc80"/> <!-- 25% roughly -->
+              <path d="M2 50 A48 48 0 0 1 50 2 L50 50 Z" fill="#fff9c4"/> <!-- 25% roughly -->
+              <text x="74" y="30" text-anchor="middle" fill="#333" font-size="10">20%</text>
+              <text x="26" y="30" text-anchor="middle" fill="#333" font-size="10">20%</text>
+               <text x="50" y="85" text-anchor="middle" fill="#333" font-size="10">30%</text>
+                <text x="18" y="60" text-anchor="middle" fill="#333" font-size="10">15%</text>
+                 <text x="82" y="60" text-anchor="middle" fill="#333" font-size="10">15%</text>
+                  <text x="50" y="55" text-anchor="middle" fill="#333" font-size="10">10%</text>
+         </svg>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>นโยบายรายวิชาที่สำคัญ</h2>
+        <p>เพื่อให้การเรียนราบรื่นและทุกคนได้ประโยชน์เต็มที่ ขอเน้นย้ำบางเรื่องครับ</p>
+        <ul>
+            <li><strong>การเข้าเรียน:</strong> นักเรียนควรเข้าชั้นเรียนอย่างน้อย 80% ของเวลาเรียนทั้งหมด เพื่อรักษาสิทธิ์ในการประเมิน</li>
+            <li><strong>การส่งงาน:</strong> งานทุกชิ้นมีกำหนดส่งที่ชัดเจน การส่งช้าอาจถูกหักคะแนน และอาจไม่รับงานที่ช้ามากๆ ครับ</li>
+            <li><strong>พฤติกรรมในชั้นเรียน:</strong> ตั้งใจเรียน มีส่วนร่วม เคารพสิทธิ์ของเพื่อนและครู ใช้โทรศัพท์/อุปกรณ์ เฉพาะที่เกี่ยวข้องกับการเรียนเท่านั้น</li>
+            <li><strong>การทุจริตทางวิชาการ:</strong> <strong>สำคัญมาก!</strong> ห้ามคัดลอกผลงานของผู้อื่น (ลอกเพื่อน, ลอกอินเทอร์เน็ตโดยไม่อ้างอิง) การทุจริตทุกรูปแบบจะส่งผลต่อคะแนนอย่างร้ายแรง และอาจถูกดำเนินการตามระเบียบของโรงเรียนครับ</li>
+        </ul>
+        <div class="svg-container">
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#ffecb3"/>
+                 <path d="M50 10 A45 45 0 0 1 50 90 A45 45 0 0 1 50 10 Z" fill="#ff9800"/>
+                 <circle cx="50" cy="40" r="12" fill="#fff"/>
+                 <path d="M45 60 H55 V70 H45 Z" fill="#ff9800"/>
+                 <path d="M40 30 L60 30 M40 75 L60 75" stroke="#ff9800" stroke-width="4"/>
+            </svg>
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 C70 5 95 20 95 40 C95 65 70 95 50 95 C30 95 5 65 5 40 C5 20 30 5 50 5Z" fill="#f8bbd0"/>
+                <path d="M50 15 C30 15 15 30 15 50 C15 70 30 85 50 85 C70 85 85 70 85 50 C85 30 70 15 50 15Z" fill="#e91e63"/>
+                 <line x1="30" y1="30" x2="70" y2="70" stroke="#f8bbd0" stroke-width="6"/>
+                 <line x1="30" y1="70" x2="70" y2="30" stroke="#f8bbd0" stroke-width="6"/>
+            </svg>
+
+        </div>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>สัปดาห์หน้า... เราจะเรียนอะไร?</h2>
+        <p>ตามแผนการเรียนรู้ สัปดาห์ที่ 2 เราจะเจาะลึกหัวข้อ:</p>
+        <h3>ชนิดของโครงงานวิทยาศาสตร์</h3>
+        <p>นักเรียนจะได้เรียนรู้ว่า โครงงานวิทยาศาสตร์ที่เราพูดถึงกัน มีกี่ประเภท แต่ละประเภทมีลักษณะเด่นอย่างไรบ้าง</p>
+        <p>และนักเรียนจะได้ลองพิจารณาว่า หัวข้อหรือแนวคิดที่นักเรียนสนใจ น่าจะจัดอยู่ในโครงงานประเภทไหนครับ</p>
+        <p class="center">เตรียมตัว เตรียมใจ... เรากำลังจะเข้าสู่โลกของโครงงานวิทยาศาสตร์จริงๆ แล้วครับ!</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#c8e6c9"/>
+             <path d="M30 30 H70 V70 H30 Z" fill="#4caf50"/>
+             <circle cx="50" cy="50" r="12" fill="#c8e6c9"/>
+             <path d="M50 38 V62 M38 50 H62" stroke="#4caf50" stroke-width="4"/>
+             <circle cx="25" cy="25" r="10" fill="#c8e6c9"/>
+             <circle cx="75" cy="25" r="10" fill="#c8e6c9"/>
+             <circle cx="25" cy="75" r="10" fill="#c8e6c9"/>
+             <circle cx="75" cy="75" r="10" fill="#c8e6c9"/>
+         </svg>
+         <div class="footer"><span>คาบเรียนที่ 1 | สัปดาห์ถัดไป</span></div>
+    </div>
+
+    <div class="slide">
+        <h2>มีคำถามเพิ่มเติมไหมครับ?</h2>
+        <p>นักเรียนสามารถสอบถามเกี่ยวกับรายวิชา เนื้อหา หรือข้อสงสัยอื่นๆ ที่มีได้เลยครับ</p>
+        <p>หากยังไม่มีคำถามตอนนี้ หรือมีคำถามภายหลัง สามารถติดต่ออาจารย์ได้ทาง:</p>
+        <p class="center"><strong>Email:</strong> <a href="mailto:chawadol_s@fangwit.ac.th">chawadol_s@fangwit.ac.th</a></p>
+        <br>
+        <p class="center">อาจารย์พร้อมให้คำแนะนำและสนับสนุนนักเรียนเต็มที่ครับ!</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#e9f5ff"/>
+            <path d="M50 18 Q65 18 65 35 V55 Q65 70 50 70 Q35 70 35 55 V35 Q35 18 50 18 Z" stroke="#007bff" stroke-width="6" fill="none"/>
+            <line x1="50" y1="70" x2="50" y2="80" stroke="#007bff" stroke-width="6"/>
+            <circle cx="50" cy="85" r="8" fill="#007bff"/>
+             <path d="M20 40 H80 M20 50 H80 M20 60 H60" stroke="#007bff" stroke-width="4"/>
+             <rect x="15" y="35" width="70" height="30" rx="6" ry="6" stroke="#007bff" stroke-width="4" fill="none"/>
+         </svg>
+         <div class="footer"><span>คาบเรียนที่ 1</span></div>
+    </div>
+
+     <div class="slide">
+        <h2>ขอให้สนุกกับการเรียนรู้<br>เรื่องโครงงานวิทยาศาสตร์ตลอดภาคเรียนนะครับ!</h2>
+        <p class="center">เรามาสร้างสรรค์ผลงานวิทยาศาสตร์ดีๆ ที่มีประโยชน์ต่อคุณภาพชีวิตไปด้วยกันครับ!</p>
+         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+             <path d="M50 10 C35 10 20 25 20 40 C20 60 50 90 50 90 C50 90 80 60 80 40 C80 25 65 10 50 10Z" fill="#81c784"/>
+             <circle cx="50" cy="40" r="18" fill="#4caf50"/>
+             <path d="M40 40 H60 M50 30 V50" stroke="#c8e6c9" stroke-width="4"/>
+              <path d="M20 65 Q35 78 50 80 Q65 78 80 65" stroke="#4caf50" stroke-width="4" fill="none"/>
+              <circle cx="30" cy="72" r="6" fill="#c8e6c9"/>
+               <circle cx="70" cy="72" r="6" fill="#c8e6c9"/>
+         </svg>
+         <div class="footer"><span>คาบเรียนที่ 1 | จบการนำเสนอ</span></div>
+    </div>
+
+
+</body>
+</html>
