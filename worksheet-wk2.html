@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทเรียนที่ 2: ชนิดของโครงงานวิทยาศาสตร์</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- รวม CSS Styles ตรงนี้ -->
+    <style>
+        body {
+            font-family: 'Pridi', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        header h1 {
+            color: #0D47A1; /* Dark Blue */
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        header h2 {
+            color: #1565C0; /* Medium Blue */
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+
+        header h3 {
+            color: #1976D2; /* Standard Blue */
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #E3F2FD; /* Light Blue Background */
+            border-left: 5px solid #2196F3; /* Blue Border */
+            border-radius: 5px;
+        }
+
+        section h2 {
+            color: #0D47A1; /* Dark Blue */
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .intro .illustration {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .intro svg {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+
+
+        .project-type {
+            display: flex;
+            align-items: center; /* Vertically align */
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #FFFFFF; /* White background for type boxes */
+            border: 1px solid #BBDEFB; /* Very light blue border */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .type-icon {
+            flex-shrink: 0; /* Prevent icon from shrinking */
+            width: 80px; /* Size of the icon area */
+            height: 80px; /* Size of the icon area */
+            margin-right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .type-icon svg {
+            width: 60px; /* Size of the SVG inside the area */
+            height: 60px; /* Size of the SVG inside the area */
+        }
+
+        .type-description {
+            flex-grow: 1; /* Allow description to take available space */
+        }
+
+        .type-description h3 {
+            color: #1976D2; /* Standard Blue */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .activity {
+            background-color: #E8F5E9; /* Light Green Background */
+            border-left-color: #4CAF50; /* Green Border */
+        }
+
+        .activity-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #FFFFFF;
+            border: 1px solid #C8E6C9; /* Very light green border */
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-item select {
+            font-family: 'Pridi', serif;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #A5D6A7;
+            border-radius: 4px;
+            width: 100%; /* Make select box wide */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        .quiz-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #FFFFFF;
+            border: 1px solid #C8E6C9; /* Very light green border */
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-item p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .quiz-item label {
+            display: block; /* Make each option on a new line */
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+
+        .quiz-item input[type="radio"] {
+            margin-right: 8px;
+        }
+
+
+        .submission {
+            background-color: #FFF3E0; /* Light Orange Background */
+            border-left-color: #FF9800; /* Orange Border */
+            text-align: center; /* Center the submission elements */
+        }
+
+        .student-id-input {
+            margin-bottom: 20px;
+        }
+
+        .student-id-input label {
+            display: block; /* Label on its own line */
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .student-id-input input[type="text"] {
+            font-family: 'Pridi', serif;
+            padding: 10px;
+            border: 1px solid #FFB74D;
+            border-radius: 4px;
+            width: 80%; /* Adjust width */
+            max-width: 300px; /* Max width for input */
+            box-sizing: border-box;
+            text-align: center; /* Center text in input */
+            display: inline-block; /* Allow centering block elements */
+        }
+
+        button {
+            font-family: 'Pridi', serif;
+            background-color: #FF9800; /* Orange button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #F57C00; /* Darker orange on hover */
+        }
+
+        #responseMessage {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #FF9800; /* Default message color */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Simple styling for placeholder SVGs - adjust fills/strokes as needed */
+        .type-icon svg rect,
+        .type-icon svg circle,
+        .type-icon svg line,
+        .type-icon svg path {
+            stroke-width: 2;
+            fill-opacity: 0.8;
+        }
+
+        /* Specific colors for placeholders (optional, can use generic above) */
+        .project-type:nth-child(1) .type-icon svg rect { fill: #FFECB3; stroke: #FFC107; } /* สำรวจ - Yellow */
+        .project-type:nth-child(1) .type-icon svg line { stroke: #FFC107; }
+        .project-type:nth-child(1) .type-icon svg circle { fill: #FFC107; }
+
+        .project-type:nth-child(2) .type-icon svg rect:nth-child(1) { fill: #D1C4E9; stroke: #673AB7; } /* ทดลอง - Purple */
+        .project-type:nth-child(2) .type-icon svg rect:nth-child(2) { fill: #673AB7; }
+        .project-type:nth-child(2) .type-icon svg circle { fill: #EDE7F6; stroke: #673AB7; }
+
+        .project-type:nth-child(3) .type-icon svg rect { fill: #B2DFDB; stroke: #009688; } /* สิ่งประดิษฐ์ - Teal */
+        .project-type:nth-child(3) .type-icon svg circle { fill: #009688; }
+        .project-type:nth-child(3) .type-icon svg path { stroke: #009688; }
+
+        .project-type:nth-child(4) .type-icon svg rect { fill: #BBDEFB; stroke: #2196F3; } /* ทฤษฎี - Blue */
+        .project-type:nth-child(4) .type-icon svg circle { fill: #1976D2; }
+        .project-type:nth-child(4) .type-icon svg line { stroke: #1976D2; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>รายวิชา วิทยาศาสตร์เพิ่มเติม ม. 2 (ว21101)</h1>
+            <h2>โครงงานวิทยาศาสตร์กับคุณภาพชีวิต</h2>
+            <h3>บทเรียนที่ 2: ชนิดของโครงงานวิทยาศาสตร์</h3>
+            <p>ผู้สอน: อาจารย์ ชวดล ศรีบุญพิมพ์สวย</p>
+        </header>
+
+        <section class="intro">
+            <p>ในบทเรียนครั้งก่อน นักเรียนได้ทำความรู้จักกับโครงงานวิทยาศาสตร์ในภาพรวมไปแล้วว่าคืออะไร และมีขั้นตอนอย่างไรบ้าง</p>
+            <p>สำหรับบทเรียนครั้งนี้ นักเรียนจะได้เจาะลึกถึง **ชนิดของโครงงานวิทยาศาสตร์** ซึ่งจะช่วยให้นักเรียนเข้าใจความหลากหลายของโครงงาน และเลือกแนวทางโครงงานที่เหมาะสมกับความสนใจของตนเองได้ดียิ่งขึ้น</p>
+            <div class="illustration">
+                <!-- Simple Placeholder SVG for Intro -->
+                <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="30" fill="#e0e0e0" rx="5"/>
+                    <circle cx="30" cy="25" r="8" fill="#4CAF50"/>
+                    <circle cx="50" cy="25" r="8" fill="#2196F3"/>
+                    <circle cx="70" cy="25" r="8" fill="#FF9800"/>
+                    <text x="50" y="45" text-anchor="middle" font-size="8" fill="#333">Types of Projects</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content">
+            <h2>ชนิดของโครงงานวิทยาศาสตร์</h2>
+            <p>โดยทั่วไปแล้ว โครงงานวิทยาศาสตร์สามารถจำแนกออกเป็นประเภทหลักๆ ได้ดังนี้:</p>
+
+            <div class="project-type">
+                <div class="type-icon">
+                     <!-- Placeholder SVG for Survey -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20 H80 V80 H20 Z" fill="#FFEB3B" stroke="#FBC02D" stroke-width="4"/>
+                        <line x1="30" y1="30" x2="70" y2="30" stroke="#FBC02D" stroke-width="4"/>
+                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FBC02D" stroke-width="4"/>
+                        <line x1="30" y1="50" x2="70" y2="50" stroke="#FBC02D" stroke-width="4"/>
+                        <circle cx="50" cy="70" r="10" fill="#FBC02D"/>
+                         <text x="50" y="95" text-anchor="middle" font-size="12" fill="#333">สำรวจ</text>
+                    </svg>
+                </div>
+                <div class="type-description">
+                    <h3>1. โครงงานประเภทสำรวจ (Survey Project)</h3>
+                    <p>เป็นโครงงานที่เน้นการรวบรวมข้อมูลจากแหล่งต่างๆ เช่น การสังเกต การสำรวจ การสอบถาม การรวบรวมข้อมูลจากเอกสารหรือเว็บไซต์ โดยมีวัตถุประสงค์เพื่อศึกษา รวบรวม และจำแนกข้อมูล นำเสนอข้อมูลในรูปแบบต่างๆ เช่น ตาราง กราฟ หรือแผนภาพ</p>
+                    <p><strong>ตัวอย่าง:</strong> สำรวจชนิดของปลาในแหล่งน้ำชุมชน, ศึกษาพฤติกรรมการบริโภคอาหารเช้าของนักเรียนในโรงเรียน, รวบรวมข้อมูลเกี่ยวกับพืชสมุนไพรท้องถิ่น</p>
+                </div>
+            </div>
+
+            <div class="project-type">
+                 <div class="type-icon">
+                     <!-- Placeholder SVG for Experiment -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="30" y="10" width="40" height="60" fill="#E1BEE7" stroke="#9C27B0" stroke-width="4"/>
+                        <rect x="20" y="70" width="60" height="10" fill="#9C27B0"/>
+                        <circle cx="50" cy="40" r="15" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+                         <text x="50" y="95" text-anchor="middle" font-size="12" fill="#333">ทดลอง</text>
+                    </svg>
+                </div>
+                <div class="type-description">
+                    <h3>2. โครงงานประเภททดลอง (Experimental Project)</h3>
+                    <p>เป็นโครงงานที่มีการออกแบบการทดลองเพื่อศึกษาความสัมพันธ์ของตัวแปรต่างๆ โดยมีการควบคุมตัวแปรบางอย่าง และเปลี่ยนแปลงตัวแปรที่ต้องการศึกษา เพื่อดูผลที่เกิดขึ้น มุ่งเน้นการหาคำตอบของปัญหาผ่านกระบวนการทดลองทางวิทยาศาสตร์</p>
+                    <p><strong>ตัวอย่าง:</strong> ทดสอบประสิทธิภาพของปุ๋ยอินทรีย์ต่อการเจริญเติบโตของพืช, ศึกษาผลของอุณหภูมิต่อการละลายของสารบางชนิด, เปรียบเทียบความแข็งแรงของวัสดุจากธรรมชาติชนิดต่างๆ</p>
+                </div>
+            </div>
+
+            <div class="project-type">
+                <div class="type-icon">
+                    <!-- Placeholder SVG for Invention -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="25" width="50" height="50" fill="#B2DFDB" stroke="#009688" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="10" fill="#009688"/>
+                        <path d="M50 25 L50 10 M25 50 L10 50 M75 50 L90 50 M50 75 L50 90" stroke="#009688" stroke-width="4" stroke-linecap="round"/>
+                         <text x="50" y="95" text-anchor="middle" font-size="12" fill="#333">สิ่งประดิษฐ์</text>
+                    </svg>
+                </div>
+                <div class="type-description">
+                    <h3>3. โครงงานประเภทสิ่งประดิษฐ์ (Invention/Development Project)</h3>
+                    <p>เป็นโครงงานที่มุ่งเน้นการนำหลักการทางวิทยาศาสตร์และเทคโนโลยีมาประยุกต์ใช้เพื่อสร้างสรรค์สิ่งประดิษฐ์ใหม่ๆ หรือปรับปรุงสิ่งที่มีอยู่แล้วให้มีประสิทธิภาพดีขึ้น โดยอาจเป็นอุปกรณ์ เครื่องมือ หรือวิธีการใหม่ๆ</p>
+                    <p><strong>ตัวอย่าง:</strong> ประดิษฐ์เครื่องกรองน้ำแบบง่ายๆ, สร้างระบบเตือนภัยน้ำท่วมขนาดเล็ก, พัฒนาแอปพลิเคชันสำหรับคัดแยกชนิดขยะ</p>
+                </div>
+            </div>
+
+             <div class="project-type">
+                <div class="type-icon">
+                    <!-- Placeholder SVG for Theoretical -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="80" fill="#BBDEFB" stroke="#2196F3" stroke-width="4"/>
+                        <circle cx="30" cy="30" r="10" fill="#1976D2"/>
+                        <circle cx="70" cy="30" r="10" fill="#1976D2"/>
+                        <circle cx="30" cy="70" r="10" fill="#1976D2"/>
+                        <circle cx="70" cy="70" r="10" fill="#1976D2"/>
+                        <line x1="30" y1="30" x2="70" y2="70" stroke="#1976D2" stroke-width="4"/>
+                        <line x1="70" y1="30" x2="30" y2="70" stroke="#1976D2" stroke-width="4"/>
+                         <text x="50" y="95" text-anchor="middle" font-size="12" fill="#333">ทฤษฎี</text>
+                    </svg>
+                </div>
+                <div class="type-description">
+                    <h3>4. โครงงานประเภททฤษฎี (Theoretical/Modeling Project)</h3>
+                    <p>เป็นโครงงานที่เน้นการศึกษา รวบรวม และวิเคราะห์ข้อมูลทางทฤษฎีหรือแนวคิดต่างๆ เพื่อสร้างแบบจำลอง อธิบายปรากฏการณ์ หรือสร้างทฤษฎีใหม่ๆ โดยอาจใช้การวิเคราะห์ข้อมูลเชิงคณิตศาสตร์หรือคอมพิวเตอร์เข้ามาช่วย</p>
+                    <p><em>(หมายเหตุ: โครงงานประเภทนี้อาจซับซ้อนและพบน้อยในระดับชั้นมัธยมศึกษาตอนต้น แต่อาจรวมอยู่ในหมวดอื่นๆ ที่ใกล้เคียงได้)</em></p>
+                </div>
+            </div>
+
+            <p>การจำแนกประเภทนี้เป็นเพียงแนวทางหนึ่งเท่านั้น ในทางปฏิบัติ โครงงานบางอย่างอาจมีลักษณะผสมผสานกันในหลายประเภท</p>
+
+        </section>
+
+        <section class="activity">
+            <h2>กิจกรรมที่ 1: ลองจำแนกประเภทโครงงาน</h2>
+            <p>จากตัวอย่างโครงงานต่อไปนี้ ให้นักเรียนเลือกประเภทที่เหมาะสมที่สุด</p>
+
+            <div class="activity-item">
+                <p><strong>ตัวอย่างที่ 1:</strong> การสำรวจความพึงพอใจของนักเรียนต่อการใช้พื้นที่ห้องสมุดของโรงเรียน</p>
+                <select class="project-classification" data-example="1">
+                    <option value="">เลือกประเภท</option>
+                    <option value="สำรวจ">สำรวจ</option>
+                    <option value="ทดลอง">ทดลอง</option>
+                    <option value="สิ่งประดิษฐ์">สิ่งประดิษฐ์</option>
+                    <option value="ทฤษฎี">ทฤษฎี</option>
+                </select>
+            </div>
+
+            <div class="activity-item">
+                <p><strong>ตัวอย่างที่ 2:</strong> การทดลองเปรียบเทียบประสิทธิภาพของน้ำหมักชีวภาพจากผลไม้ต่างชนิดกันในการเร่งการเจริญเติบโตของต้นคะน้า</p>
+                 <select class="project-classification" data-example="2">
+                    <option value="">เลือกประเภท</option>
+                    <option value="สำรวจ">สำรวจ</option>
+                    <option value="ทดลอง">ทดลอง</option>
+                    <option value="สิ่งประดิษฐ์">สิ่งประดิษฐ์</option>
+                    <option value="ทฤษฎี">ทฤษฎี</option>
+                </select>
+            </div>
+
+             <div class="activity-item">
+                <p><strong>ตัวอย่างที่ 3:</strong> การประดิษฐ์เครื่องแยกเหรียญบาท เหรียญห้าบาท และเหรียญสิบบาทอัตโนมัติ</p>
+                 <select class="project-classification" data-example="3">
+                    <option value="">เลือกประเภท</option>
+                    <option value="สำรวจ">สำรวจ</option>
+                    <option value="ทดลอง">ทดลอง</option>
+                    <option value="สิ่งประดิษฐ์">สิ่งประดิษฐ์</option>
+                    <option value="ทฤษฎี">ทฤษฎี</option>
+                </select>
+            </div>
+
+        </section>
+
+         <section class="activity">
+            <h2>กิจกรรมที่ 2: ทดสอบความเข้าใจ</h2>
+            <p>ให้นักเรียนเลือกคำตอบที่ถูกต้องที่สุด</p>
+
+            <div class="quiz-item">
+                <p>ข้อ 1: โครงงานที่เน้นการเก็บรวบรวมข้อมูลจากการสังเกตหรือสอบถาม โดยไม่มีการจัดสภาพการณ์หรือควบคุมตัวแปร มักจัดอยู่ในประเภทใด?</p>
+                <label><input type="radio" name="q1" value="สำรวจ"> ก. สำรวจ</label><br>
+                <label><input type="radio" name="q1" value="ทดลอง"> ข. ทดลอง</label><br>
+                <label><input type="radio" name="q1" value="สิ่งประดิษฐ์"> ค. สิ่งประดิษฐ์</label><br>
+                <label><input type="radio" name="q1" value="ทฤษฎี"> ง. ทฤษฎี</label>
+            </div>
+
+            <div class="quiz-item">
+                <p>ข้อ 2: หากนักเรียนต้องการศึกษาว่าปริมาณแสงแดดส่งผลต่ออัตราการสังเคราะห์ด้วยแสงของพืชอย่างไร ควรเลือกทำโครงงานประเภทใด?</p>
+                 <label><input type="radio" name="q2" value="สำรวจ"> ก. สำรวจ</label><br>
+                <label><input type="radio" name="q2" value="ทดลอง"> ข. ทดลอง</label><br>
+                <label><input type="radio" name="q2" value="สิ่งประดิษฐ์"> ค. สิ่งประดิษฐ์</label><br>
+                <label><input type="radio" name="q2" value="ทฤษฎี"> ง. ทฤษฎี</label>
+            </div>
+
+             <div class="quiz-item">
+                <p>ข้อ 3: การสร้างอุปกรณ์ดักจับฝุ่น PM 2.5 ด้วยไฟฟ้าสถิต จัดเป็นโครงงานประเภทใด?</p>
+                 <label><input type="radio" name="q3" value="สำรวจ"> ก. สำรวจ</label><br>
+                <label><input type="radio" name="q3" value="ทดลอง"> ข. ทดลอง</label><br>
+                <label><input type="radio" name="q3" value="สิ่งประดิษฐ์"> ค. สิ่งประดิษฐ์</label><br>
+                <label><input type="radio" name="q3" value="ทฤษฎี"> ง. ทฤษฎี</label>
+            </div>
+
+        </section>
+
+        <section class="submission">
+            <h2>ส่งผลกิจกรรม</h2>
+            <div class="student-id-input">
+                <label for="studentId">เลขประจำตัวนักเรียน:</label>
+                <input type="text" id="studentId" name="studentId" required>
+            </div>
+            <button id="submitBtn">ส่งผลกิจกรรม</button>
+            <p id="responseMessage"></p>
+        </section>
+
+        <footer>
+            <p>ประมวลผลรายวิชา (Course Syllabus) - วิทยาศาสตร์เพิ่มเติม ม. 2</p>
+            <p>ภาคเรียนที่ 2 / 2568</p>
+            <p>ข้อมูลผู้สอน: อาจารย์ ชวดล ศรีบุญพิมพ์สวย | ช่องทางการติดต่อ: chawadol_s@fangwit.ac.th</p>
+            <p>© 2024 [ชื่อโรงเรียนของคุณ หรือชื่อผู้จัดทำ]</p>
+        </footer>
+    </div>
+
+    <!-- รวม JavaScript Script ตรงนี้ -->
+    <script>
+        // ** สำคัญมาก: แทนที่ URL นี้ด้วย URL ของ Web App Google Apps Script ของคุณ **
+        // ดูวิธีการตั้งค่าได้ในส่วนคำแนะนำเพิ่มเติมด้านล่าง
+        const GOOGLE_SHEET_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const studentId = document.getElementById('studentId').value.trim();
+            const responseMessage = document.getElementById('responseMessage');
+
+            if (!studentId) {
+                responseMessage.textContent = 'โปรดกรอกเลขประจำตัวนักเรียนก่อนส่งข้อมูล';
+                responseMessage.style.color = 'red';
+                return;
+            }
+
+            // รวบรวมข้อมูลกิจกรรมที่ 1 (การจำแนกประเภท)
+            const classifications = {};
+            document.querySelectorAll('.project-classification').forEach(selectElement => {
+                const exampleNum = selectElement.dataset.example;
+                classifications[`ตัวอย่างที่ ${exampleNum}`] = selectElement.value || 'ไม่ได้เลือก';
+            });
+
+            // รวบรวมข้อมูลกิจกรรมที่ 2 (แบบทดสอบ)
+            const quizAnswers = {};
+            let correctAnswersCount = 0;
+            const correctQuizAnswers = { // เฉลยแบบทดสอบ
+                q1: 'สำรวจ',
+                q2: 'ทดลอง',
+                q3: 'สิ่งประดิษฐ์'
+            };
+
+            document.querySelectorAll('.quiz-item').forEach(quizItem => {
+                const questionName = quizItem.querySelector('input[type="radio"]').name;
+                const selectedOption = quizItem.querySelector(`input[name="${questionName}"]:checked`);
+                quizAnswers[`ข้อ ${questionName.replace('q','')}`] = selectedOption ? selectedOption.value : 'ไม่ได้เลือก';
+
+                // ตรวจสอบคำตอบเพื่อคิดคะแนน
+                if (selectedOption && correctQuizAnswers[questionName] && selectedOption.value === correctQuizAnswers[questionName]) {
+                    correctAnswersCount++;
+                }
+            });
+
+            const quizScore = `${correctAnswersCount} / ${Object.keys(correctQuizAnswers).length}`;
+
+
+            // สร้าง FormData สำหรับส่งข้อมูล
+            const formData = new FormData();
+            formData.append('timestamp', new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' })); // เพิ่มเวลาไทยเพื่อสะดวกในการจัดเรียงใน Sheet
+            formData.append('studentId', studentId);
+            formData.append('classifications', JSON.stringify(classifications)); // แปลง Object เป็น String ก่อนส่ง
+            formData.append('quizAnswers', JSON.stringify(quizAnswers)); // แปลง Object เป็น String ก่อนส่ง
+            formData.append('quizScore', quizScore);
+
+
+            // ส่งข้อมูลไปยัง Google Apps Script Web App
+            // แสดงข้อความกำลังส่ง
+            responseMessage.textContent = 'กำลังส่งข้อมูล...';
+            responseMessage.style.color = '#FF9800'; // สีส้ม
+
+            fetch(GOOGLE_SHEET_WEB_APP_URL, {
+                method: 'POST',
+                body: formData // ใช้ FormData ในการส่ง
+            })
+            .then(response => {
+                 if (!response.ok) {
+                    // หากการตอบกลับไม่ OK (เช่น status code 400, 500) ให้ throw error
+                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`) });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                responseMessage.textContent = 'ส่งข้อมูลกิจกรรมเรียบร้อยแล้ว ขอบคุณที่ร่วมกิจกรรมครับ!';
+                responseMessage.style.color = 'green';
+                // Optional: Disable button or clear form after success
+                // document.getElementById('submitBtn').disabled = true;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                responseMessage.textContent = `เกิดข้อผิดพลาดในการส่งข้อมูล: ${error.message}. โปรดลองอีกครั้งหรือแจ้งอาจารย์`;
+                responseMessage.style.color = 'red';
+            });
+        });
+
+    </script>
+
+</body>
+</html>
