@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คาบที่ 4: การเชื่อมโยงโครงงานกับคุณภาพชีวิต และการเลือกหัวข้อ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #005A8D;
+            --secondary-color: #00A9E0;
+            --accent-color: #FFC72C;
+            --bg-color: #F8F9FA;
+            --text-color: #333;
+            --light-text-color: #FFF;
+            --header-font: 'Sarabun', sans-serif;
+            --body-font: 'Sarabun', sans-serif;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--body-font);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        #presentation-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        /* Layouts */
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+        }
+        .slide-title h1 { font-size: 4.5rem; margin-bottom: 0.5rem; font-weight: 800; }
+        .slide-title h2 { font-size: 2.2rem; margin-top: 0; font-weight: 400; }
+        .slide-title p { font-size: 1.5rem; }
+
+        .slide-header {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px 60px;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .slide-content {
+            margin-top: 80px;
+            width: 100%;
+            height: calc(100% - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 40px;
+        }
+
+        .content-left, .content-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .content-full {
+             flex: 1;
+             width: 100%;
+             height: 100%;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+        }
+
+        .content-left { text-align: left; }
+        
+        h1, h2, h3, h4 {
+            font-family: var(--header-font);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 2rem; }
+        
+        p, li {
+            font-size: 1.5rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        ul, ol {
+            text-align: left;
+            margin-left: 30px;
+            max-width: 800px;
+        }
+        
+        ul { list-style-type: '✓ '; padding-left: 20px;}
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .icon-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid var(--secondary-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .icon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .icon-item svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+            fill: var(--primary-color);
+        }
+        .icon-item h4 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .activity-box {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 3px solid #EAA900;
+            text-align: left;
+        }
+        .activity-box h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+        }
+        .activity-box h3 svg {
+            width: 40px; height: 40px; margin-right: 15px; fill: var(--primary-color);
+        }
+
+        .quote-box {
+            background: #fff;
+            border-left: 10px solid var(--secondary-color);
+            padding: 20px 40px;
+            margin: 20px 0;
+            font-style: italic;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .funnel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .funnel-step {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            margin-bottom: 5px;
+            text-align: center;
+            transition: width 0.5s;
+        }
+        .funnel-step-1 { width: 80%; border-radius: 10px 10px 0 0; background-color: #005A8D;}
+        .funnel-step-2 { width: 60%; background-color: #0077B6; }
+        .funnel-step-3 { width: 40%; background-color: #0096C7; }
+        .funnel-step-4 { width: 20%; border-radius: 0 0 10px 10px; background-color: #48CAE4; }
+        .funnel-arrow {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            line-height: 0.5;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        #slide-counter {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            align-self: center;
+        }
+        
+        .vector-image {
+            max-width: 400px;
+            max-height: 400px;
+            width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="presentation-container">
+
+        <!-- Slide 1: Title Slide -->
+        <section class="slide active slide-title">
+            <p>รายวิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 (โครงงานวิทยาศาสตร์)</p>
+            <h1>คาบที่ 4</h1>
+            <h2>การเชื่อมโยงโครงงานกับคุณภาพชีวิต<br>และการระบุปัญหา/เลือกหัวข้อโครงงาน</h2>
+            <p style="margin-top: 50px;">อ.ชวดล ศรีบุญพิมพ์สวย</p>
+        </section>
+
+        <!-- Slide 2: Recap -->
+        <section class="slide">
+            <div class="slide-header">ทบทวนความรู้จากคาบที่แล้ว</div>
+            <div class="slide-content">
+                <div class="content-left">
+                    <h2>ครั้งที่แล้วเราเรียนอะไรไปบ้าง?</h2>
+                    <ul>
+                        <li><b>โครงงานวิทยาศาสตร์คืออะไร:</b> กระบวนการศึกษาอย่างมีระบบเพื่อตอบคำถามที่สงสัย</li>
+                        <li><b>ประเภทของโครงงาน:</b> ทดลอง, สำรวจ, สิ่งประดิษฐ์, ทฤษฎี</li>
+                        <li><b>ขั้นตอนภาพรวม:</b> การกำหนดปัญหา ➔ การตั้งสมมติฐาน ➔ การออกแบบการทดลอง ➔ การดำเนินงาน ➔ การสรุปและอภิปรายผล</li>
+                    </ul>
+                    <p style="margin-top: 30px;">วันนี้ เราจะมาเจาะลึกใน <b>"ขั้นตอนแรก"</b> ที่สำคัญที่สุด นั่นคือ <b>"การหาหัวข้อที่ใช่"</b></p>
+                </div>
+                <div class="content-right">
+                    <svg class="vector-image" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#00A9E0" d="M256 0c-141.4 0-256 114.6-256 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm-24.6 408.6l-128-128c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L240 346.8l166.1-166.1c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-183 183c-9.4 9.4-24.6 9.4-34 .1z"/></svg>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Learning Objectives -->
+        <section class="slide">
+             <div class="slide-header">เป้าหมายการเรียนรู้ประจำคาบนี้</div>
+             <div class="slide-content content-full">
+                 <h2>เมื่อสิ้นสุดคาบเรียนนี้ นักเรียนจะสามารถ:</h2>
+                 <div class="icon-grid" style="grid-template-columns: 1fr 1fr; max-width: 1000px;">
+                     <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm3.71,12.29a1,1,0,0,1,0,1.42,1,1,0,0,1-1.42,0L12,13.41l-2.29,2.3a1,1,0,0,1-1.42,0,1,1,0,0,1,0-1.42L10.59,12,8.29,9.71A1,1,0,0,1,9.71,8.29L12,10.59l2.29-2.3a1,1,0,1,1,1.42,1.42L13.41,12Z"/></svg>
+                        <h4><b>ระบุปัญหา</b>ที่สนใจจากสิ่งรอบตัว</h4>
+                     </div>
+                     <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5,4.6a5.5,5.5,0,0,0-7.78,0l-1,1-1-1A5.5,5.5,0,0,0,3.5,12.38l8.5,8.5,8.5-8.5A5.5,5.5,0,0,0,20.5,4.6ZM19.08,10.94,12,18,4.92,10.94a3.5,3.5,0,0,1,4.95-4.95l1.34,1.34a1,1,0,0,0,1.42,0L14.12,6a3.5,3.5,0,0,1,4.95,4.95Z"/></svg>
+                        <h4><b>เชื่อมโยงปัญหา</b>เข้ากับแนวคิด "คุณภาพชีวิต"</h4>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Slide 4: Intro to Quality of Life -->
+        <section class="slide">
+            <div class="slide-header">Part 1: โครงงานวิทยาศาสตร์ที่ดี เริ่มต้นจากที่ไหน?</div>
+            <div class="slide-content">
+                <div class="content-left">
+                    <h2>เริ่มต้นจาก...<br><b>"คุณภาพชีวิต"</b></h2>
+                    <p><b>คุณภาพชีวิต (Quality of Life)</b> คือ ความพึงพอใจในชีวิตด้านต่างๆ ของบุคคล ซึ่งไม่ได้หมายถึงแค่การมีเงิน แต่ครอบคลุมมิติที่หลากหลาย</p>
+                    <p>โครงงานวิทยาศาสตร์ที่ดี มักจะมุ่งเน้นไปที่ <b>การแก้ปัญหา</b> หรือ <b>การพัฒนา</b> สิ่งต่างๆ เพื่อยกระดับคุณภาพชีวิตให้ดีขึ้น</p>
+                </div>
+                <div class="content-right">
+                     <svg class="vector-image" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M54.2 16.5c-2-2.8-5-4.5-8.2-4.5H18c-3.2 0-6.2 1.7-8.2 4.5C6.3 20.9 4 27.2 4 34v12c0 1.1.9 2 2 2h52c1.1 0 2-.9 2-2V34c0-6.8-2.3-13.1-5.8-17.5zM18 14h28c2.4 0 4.8 1.3 6.4 3.5.4.5.7 1 .9 1.5H10.7c.2-.5.5-1 .9-1.5C13.2 15.3 15.6 14 18 14zM6 34c0-6.2 2.2-12 5.3-16h41.4C55.8 22 58 27.8 58 34H6z" fill="#005A8D"/><path d="M32 36c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm16 0c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm-32 0c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z" fill="#00A9E0"/></svg>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Aspects of Quality of Life -->
+        <section class="slide">
+            <div class="slide-header">มิติต่างๆ ของ "คุณภาพชีวิต"</div>
+            <div class="slide-content content-full">
+                <h2>โครงงานของเราจะช่วยพัฒนาด้านไหนได้บ้าง?</h2>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2a8,8,0,0,0-8,8c0,5.4,7,11.5,7.35,11.8a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,11a3,3,0,1,1,3-3A3,3,0,0,1,12,13Z"/></svg>
+                        <h4>สิ่งแวดล้อม</h4>
+                        <p style="font-size:1rem;">เช่น ปัญหาขยะ, มลพิษทางน้ำ-อากาศ, การประหยัดพลังงาน</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.4,14.82,12,19.22l-4.4-4.4a5.5,5.5,0,0,1,7.78-7.78l.4.4.4-.4a5.5,5.5,0,0,1,7.78,7.78Z"/></svg>
+                        <h4>สุขภาพและสุขอนามัย</h4>
+                        <p style="font-size:1rem;">เช่น การออกกำลังกาย, อาหารเพื่อสุขภาพ, การป้องกันโรค</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2a10,10,0,0,0-9,5.54,1,1,0,0,0,.15,1l.05.08,8,13.8a1,1,0,0,0,1.74,0l8-13.8.05-.08a1,1,0,0,0,.15-1A10,10,0,0,0,12,2Zm0,12a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"/></svg>
+                        <h4>ความปลอดภัย</h4>
+                        <p style="font-size:1rem;">เช่น อุปกรณ์เตือนภัย, ความปลอดภัยบนท้องถนน, การป้องกันอุบัติเหตุ</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Zm-1-4.83V8.68a1,1,0,0,1,2,0v7.49a1,1,0,0,1-2,0Z"/></svg>
+                        <h4>ความสะดวกสบาย/การใช้ชีวิต</h4>
+                        <p style="font-size:1rem;">เช่น การทำงานบ้าน, การเดินทาง, การเรียนรู้</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19,4H5A3,3,0,0,0,2,7V17a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,13a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V7A1,1,0,0,1,5,6H19a1,1,0,0,1,1,1Z"/></svg>
+                        <h4>เศรษฐกิจ/การเกษตร</h4>
+                        <p style="font-size:1rem;">เช่น การเพิ่มผลผลิต, การถนอมอาหาร, การสร้างรายได้เสริม</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Activity 1 -->
+        <section class="slide">
+            <div class="activity-box">
+                <h3>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15,4V5h3.59L12,11.59,9.41,9,8,10.41l3,3L18,6.41V10h2V4ZM4,9a3,3,0,0,0,3,3H9v2H7a5,5,0,0,1-5-5V7H4ZM4,15H6v2H4ZM9,17h2v2H9Zm2-8H9V7h2Zm9,6h2v2H20Zm-2-2h2V9H18ZM15,17h2v2H15Zm-4,0h2v2H11Z"/></svg>
+                    กิจกรรมที่ 1: "Mind Map คุณภาพชีวิตในชุมชนของเรา"
+                </h3>
+                <ol>
+                    <li><b>รายบุคคล (5 นาที):</b> ให้นักเรียนลองคิดว่า "คุณภาพชีวิตที่ดี" ในโรงเรียน หรือในชุมชนของนักเรียน ควรประกอบด้วยอะไรบ้าง? ลองเขียนออกมาเป็นข้อๆ</li>
+                    <li><b>จับกลุ่ม (10 นาที):</b> รวมกลุ่มกับเพื่อน (กลุ่มสำหรับทำโครงงาน) แล้วนำสิ่งที่แต่ละคนคิดมารวมกัน สร้างเป็น <b>Mind Map</b> ของกลุ่ม</li>
+                    <li><b>แลกเปลี่ยน (5 นาที):</b> แต่ละกลุ่มส่งตัวแทนมาเล่าภาพรวม Mind Map ของกลุ่มตัวเองให้เพื่อนๆ ฟัง</li>
+                </ol>
+                <p><b>เป้าหมาย:</b> เพื่อให้นักเรียนเห็นภาพร่วมกันว่า "คุณภาพชีวิต" ไม่ใช่เรื่องไกลตัว และมีหลายแง่มุมที่เราสามารถเข้าไปเกี่ยวข้องได้</p>
+            </div>
+        </section>
+
+        <!-- Slide 7: Finding Problems -->
+        <section class="slide">
+            <div class="slide-header">Part 2: การค้นหาปัญหาจากสิ่งรอบตัว</div>
+            <div class="slide-content content-full">
+                <div class="quote-box">
+                    <p>"วิทยาศาสตร์ที่ยิ่งใหญ่ที่สุด<br>ไม่ได้เกิดขึ้นในห้องทดลองที่ซับซ้อน<br>แต่เกิดจาก <b>ความสงสัย</b> ในสิ่งธรรมดารอบตัว"</p>
+                </div>
+                <h2>ปัญหาอยู่รอบตัวเรา... แค่เราต้องหัดเป็นคนช่างสังเกต!</h2>
+                <svg class="vector-image" style="max-width:300px; margin-top: 20px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#00A9E0" d="M20.71,19.29l-3.4-3.39A7.92,7.92,0,0,0,19,11a8,8,0,1,0-8,8,7.92,7.92,0,0,0,4.9-1.69l3.39,3.4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM5,11a6,6,0,1,1,6,6,6,6,0,0,1-6-6Z"/></svg>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Where to find problems? -->
+        <section class="slide">
+            <div class="slide-header">เราจะหา "ปัญหา" หรือ "ความสงสัย" ได้จากที่ไหน?</div>
+            <div class="slide-content content-full">
+                <div class="icon-grid" style="grid-template-columns: 1fr 1fr 1fr; max-width: 1200px;">
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20,8h-3V5.5A2.5,2.5,0,0,0,14.5,3h-5A2.5,2.5,0,0,0,7,5.5V8H4a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2H20a2,2,0,0,0,2-2V10A2,2,0,0,0,20,8ZM9,5.5A.5.5,0,0,1,9.5,5h5a.5.5,0,0,1,.5.5V8H9Z"/></svg>
+                        <h4>ที่โรงเรียน</h4>
+                        <p style="font-size:1rem;">ขยะในโรงอาหาร, การใช้พลังงานในห้องเรียน, แปลงเกษตรของโรงเรียน, ปัญหาเพื่อนไม่ตั้งใจเรียน</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2.09,4,7.77V22H20V7.77ZM18,20H14V14H10v6H6V8.63l6-4.11,6,4.11Z"/></svg>
+                        <h4>ที่บ้าน</h4>
+                        <p style="font-size:1rem;">เปลือกผลไม้ที่เหลือทิ้ง, ปัญหามดแมลง, การตากผ้าที่ไม่แห้ง, การจัดของไม่เป็นระเบียบ</p>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.8,13.56a1,1,0,0,0-1.09.21L15,17.26V4a1,1,0,0,0-2,0V17.26l-2.71-3.49a1,1,0,0,0-1.64,1.28l4.47,5.75a1,1,0,0,0,1.64,0l4.47-5.75a1,1,0,0,0-.43-1.49Z"/></svg>
+                        <h4>ในชุมชน/ท้องถิ่น</h4>
+                        <p style="font-size:1rem;">น้ำในคลองมีสีแปลกๆ, วัชพืชที่ขึ้นเยอะเกินไป, ผลผลิตทางการเกษตรของคนในชุมชน</p>
+                    </div>
+                </div>
+                 <p style="margin-top: 30px;"><b>เคล็ดลับ:</b> ลองมองหา "ความไม่สะดวก" "ความสิ้นเปลือง" หรือ "สิ่งที่น่าจะดีกว่านี้ได้"</p>
+            </div>
+        </section>
+
+        <!-- Slide 9: Activity 2 -->
+        <section class="slide">
+            <div class="activity-box">
+                <h3>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm1,14H11V14h2Zm0-4H11V6h2Z"/></svg>
+                    กิจกรรมที่ 2: "นักสืบสายปัญหา" (Problem Hunter)
+                </h3>
+                <p><b>เป้าหมาย:</b> ระดมสมองเพื่อค้นหาปัญหาหรือประเด็นที่น่าสนใจให้ได้มากที่สุด</p>
+                <ol>
+                    <li><b>ระดมสมองเดี่ยว (5 นาที):</b> ให้นักเรียนแต่ละคนเขียนรายการ "ปัญหา" "ความไม่สะดวก" หรือ "ความสงสัย" ที่พบเห็นในชีวิตประจำวัน (ที่บ้าน, โรงเรียน, ชุมชน) ลงในกระดาษของตนเองให้ได้มากที่สุด <b>*ไม่ต้องกังวลว่าดีหรือไม่ดี เขียนทุกอย่างที่คิดออก!*</b></li>
+                    <li><b>ระดมสมองกลุ่ม (15 นาที):</b>
+                        <ul>
+                            <li>นำรายการของทุกคนในกลุ่มมารวมกัน</li>
+                            <li>ช่วยกันจัดกลุ่มของปัญหาตามมิติคุณภาพชีวิต (สิ่งแวดล้อม, สุขภาพ, ความปลอดภัย ฯลฯ) ที่เรียนไปก่อนหน้า</li>
+                            <li>ลองต่อยอดความคิดของเพื่อน "ถ้าเจอปัญหานี้... เราจะทำอะไรกับมันได้บ้างนะ?"</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><b>กฎของการระดมสมอง:</b> 1. เน้นปริมาณ ไม่เน้นคุณภาพ 2. ห้ามวิจารณ์ความคิดคนอื่น 3. ต่อยอดไอเดียกันได้ 4. สนับสนุนความคิดแปลกใหม่</p>
+            </div>
+        </section>
+        
+        <!-- Slide 10: From Problem to Topic -->
+        <section class="slide">
+            <div class="slide-header">Part 3: เปลี่ยน "ปัญหา" ให้เป็น "หัวข้อโครงงาน"</div>
+            <div class="slide-content content-full">
+                <h2>ไม่ใช่ทุกปัญหาจะเหมาะกับการทำโครงงาน</h2>
+                <p>เราต้องคัดเลือกและปรับเปลี่ยนปัญหาที่กว้างๆ ให้กลายเป็นหัวข้อที่ <b>"เฉพาะเจาะจง"</b> และ <b>"ทำได้จริง"</b></p>
+                
+                <div class="funnel-container" style="margin-top:20px;">
+                    <div class="funnel-step funnel-step-1">
+                        <p style="color:white; font-size: 1.5rem; margin:0;">ประเด็นกว้างๆ (เช่น ปัญหาขยะ)</p>
+                    </div>
+                    <div class="funnel-arrow">↓</div>
+                     <div class="funnel-step funnel-step-2">
+                        <p style="color:white; font-size: 1.4rem; margin:0;">ปัญหาที่เฉพาะเจาะจง (เช่น ปัญหาเศษอาหารในโรงอาหาร)</p>
+                    </div>
+                    <div class="funnel-arrow">↓</div>
+                     <div class="funnel-step funnel-step-3">
+                        <p style="color:white; font-size: 1.3rem; margin:0;">คำถามนำ (เช่น เราจะเปลี่ยนเศษอาหารให้มีประโยชน์ได้อย่างไร?)</p>
+                    </div>
+                     <div class="funnel-arrow">↓</div>
+                     <div class="funnel-step funnel-step-4">
+                        <p style="color:white; font-size: 1.2rem; margin:0;"><b>หัวข้อโครงงาน</b> (เช่น การศึกษาประสิทธิภาพของปุ๋ยหมักจากเศษอาหาร)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 11: Criteria for a good topic -->
+        <section class="slide">
+             <div class="slide-header">5 เกณฑ์การเลือกหัวข้อโครงงานที่ดี (SMART + I)</div>
+             <div class="slide-content content-full">
+                <div class="icon-grid" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                    <div class="icon-item">
+                        <h4><b>S</b> - Specific (เฉพาะเจาะจง)</h4>
+                        <p style="font-size:1rem;">หัวข้อชัดเจน ไม่กว้างเกินไป บอกได้ว่าจะศึกษาอะไร กับอะไร</p>
+                    </div>
+                    <div class="icon-item">
+                        <h4><b>M</b> - Measurable (วัดผลได้)</h4>
+                        <p style="font-size:1rem;">สามารถเก็บข้อมูลเชิงปริมาณหรือคุณภาพเพื่อวัดผลได้</p>
+                    </div>
+                    <div class="icon-item">
+                        <h4><b>A</b> - Achievable (ทำได้จริง)</h4>
+                        <p style="font-size:1rem;">มีความเป็นไปได้ในด้านเวลา งบประมาณ อุปกรณ์ และความรู้</p>
+                    </div>
+                    <div class="icon-item">
+                        <h4><b>R</b> - Relevant (เกี่ยวข้อง/มีประโยชน์)</h4>
+                        <p style="font-size:1rem;">สอดคล้องกับปัญหา ช่วยแก้ปัญหาหรือสร้างประโยชน์ได้</p>
+                    </div>
+                    <div class="icon-item">
+                        <h4><b>T</b> - Time-bound (มีกรอบเวลา)</h4>
+                        <p style="font-size:1rem;">สามารถทำเสร็จได้ภายในเวลาที่กำหนดของภาคเรียนนี้</p>
+                    </div>
+                    <div class="icon-item" style="border-color: var(--accent-color); background-color: #FFF9E6;">
+                        <h4><b>I</b> - Interesting (น่าสนใจ)</h4>
+                        <p style="font-size:1rem;">เป็นเรื่องที่สมาชิกในกลุ่มสนใจจริงๆ เพราะเราต้องอยู่กับมันไปอีกนาน!</p>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Slide 12: Activity 3 -->
+        <section class="slide">
+            <div class="activity-box">
+                <h3>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.4,7.34,16.66,4.6A2,2,0,0,0,14.77,4l-9,9a2,2,0,0,0-.57,1.21L4,20.06a1,1,0,0,0,1,1,1,1,0,0,0,.06,0L10.84,20a2,2,0,0,0,1.21-.57l9-9a2,2,0,0,0,0-2.83ZM10.2,18.17,6,18l1.17-4.2,6-6L17.4,12.2ZM18.81,11,13,5.19l1.77-1.77L19.59,8.23Z"/></svg>
+                    กิจกรรมที่ 3: "ปั้นปัญหา... ให้เป็นหัวข้อ"
+                </h3>
+                <p><b>เป้าหมาย:</b> ฝึกเปลี่ยนปัญหาที่น่าสนใจให้กลายเป็นร่างหัวข้อโครงงานที่ชัดเจนขึ้น</p>
+                <ol>
+                    <li><b>เลือกปัญหา (5 นาที):</b> จากรายการปัญหาทั้งหมดที่ระดมสมองกันในกิจกรรมที่ 2 ให้กลุ่มของนักเรียนเลือกปัญหาที่ "น่าสนใจที่สุด" มา 2-3 ปัญหา</li>
+                    <li><b>ใช้ Template ปั้นหัวข้อ (20 นาที):</b> สำหรับแต่ละปัญหาที่เลือกมา ให้ลองตอบคำถามในใบงาน (Template) ต่อไปนี้
+                        <ul>
+                            <li><b>ปัญหาคืออะไร:</b> (อธิบายสั้นๆ)</li>
+                            <li><b>ปัญหานี้ส่งผลต่อคุณภาพชีวิตด้านไหน:</b> (สิ่งแวดล้อม/สุขภาพ/ฯลฯ)</li>
+                            <li><b>เราอยากรู้อะไรเกี่ยวกับปัญหานี้:</b> (ตั้งเป็นคำถาม)</li>
+                            <li><b>ร่างหัวข้อโครงงาน (ลองตั้งชื่อ):</b></li>
+                            <li><b>ตรวจสอบเบื้องต้น (ตามเกณฑ์ 5 ข้อ):</b> ทำได้จริงไหม? วัดผลได้ไหม? น่าสนใจไหม?</li>
+                        </ul>
+                    </li>
+                     <li><b>ปรึกษาครู (10 นาที):</b> ครูจะเดินไปให้คำแนะนำแต่ละกลุ่มเกี่ยวกับร่างหัวข้อที่คิดขึ้น</li>
+                </ol>
+            </div>
+        </section>
+        
+        <!-- Slide 13: Example -->
+        <section class="slide">
+             <div class="slide-header">ตัวอย่างการ "ปั้น" หัวข้อ</div>
+             <div class="slide-content">
+                <div class="content-left" style="background: #f0f8ff; padding: 20px; border-radius: 10px;">
+                    <h3>Template การปั้นหัวข้อ</h3>
+                    <ul>
+                        <li><b>ปัญหาคืออะไร:</b> ที่บ้านมีเปลือกส้มกับเปลือกมะนาวเหลือทิ้งเยอะมาก เสียดาย</li>
+                        <li><b>ส่งผลต่อคุณภาพชีวิตด้านไหน:</b> สิ่งแวดล้อม (ลดขยะ), เศรษฐกิจ (ลดรายจ่าย)</li>
+                        <li><b>อยากรู้อะไรเกี่ยวกับปัญหานี้:</b> เปลือกส้ม/มะนาวเอาไปทำน้ำยาทำความสะอาดได้จริงไหม? และเปลือกของผลไม้ชนิดไหนดีกว่ากัน?</li>
+                        <li><b>ร่างหัวข้อโครงงาน:</b>
+                            <ul style="list-style-type:'→ '">
+                                <li>การทำน้ำยาทำความสะอาดจากเปลือกส้ม</li>
+                                <li>การเปรียบเทียบประสิทธิภาพของน้ำยาทำความสะอาดจากเปลือกส้มและเปลือกมะนาว</li>
+                            </ul>
+                        </li>
+                        <li><b>ตรวจสอบเบื้องต้น:</b> น่าสนใจ, ทำได้จริง, วัดผลได้ (อาจจะวัดจากความสามารถในการขจัดคราบ), มีประโยชน์</li>
+                    </ul>
+                </div>
+                <div class="content-right">
+                    <svg class="vector-image" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC72C" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256c20.5 0 40-2.4 58.5-7.1-4.8-14.8-5.3-30.8-1.5-46.2 3.8-15.4 11.2-29.6 21.4-41.9-18.7-2.1-38.2-9.3-38.2-85.2 0-18.8 6.7-34.2 17.7-46.3-1.8-4.6-7.7-21.9 1.7-45.6 0 0 7.1-2.3 23.2 8.6 6.7-1.9 13.9-2.8 21-2.9 7.1.1 14.3 1 21 2.9 16.1-10.8 23.2-8.6 23.2-8.6 9.4 23.7 3.5 41 1.7 45.6 11 12.1 17.7 27.5 17.7 46.3 0 76.1-19.5 83.1-38.3 85.1 10.2 8.8 19.4 26.2 19.4 52.8v78.2c28.3-16.1 51.2-40.8 65.7-70.6C486.2 340.5 512 300.5 512 256 512 114.6 397.4 0 256 0z"/><path fill="#005A8D" d="M370.8 300.2c10.2-12.3 17.6-26.5 21.4-41.9 3.8-15.4 3.3-31.4-1.5-46.2 18.5 4.7 36.5 11.6 52.8 20.5-2.8 15.8-7.2 31-13.2 45.2-12.9 30.3-31.1 56.4-53.9 77.2-2.3-14.9-6.3-29.3-12.2-42.3-6-13.1-13.8-24.8-23.4-32.5z"/></svg>
+                    <p><b>เชื่อมโยงสู่แหล่งเรียนรู้เพิ่มเติม:</b><br>
+                    นักเรียนสามารถค้นหาไอเดียโครงงานวิทยาศาสตร์เพิ่มเติมได้จากเว็บไซต์ของ <a href="https://www.nsm.or.th/" target="_blank">องค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ (อพวช.)</a> หรือ <a href="https://www.scisoc.or.th/" target="_blank">สมาคมวิทยาศาสตร์แห่งประเทศไทยฯ</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Summary -->
+        <section class="slide">
+            <div class="slide-header">สรุปเนื้อหาสำคัญในวันนี้</div>
+            <div class="slide-content">
+                <div class="content-left">
+                     <svg class="vector-image" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#005A8D" d="M21,3H3A2,2,0,0,0,1,5V19a2,2,0,0,0,2,2H21a2,2,0,0,0,2-2V5A2,2,0,0,0,21,3Zm-2.71,5.29-5,5a1,1,0,0,1-1.41,0L7.71,9.12a1,1,0,0,1,1.41-1.41L12,10.59l4.88-4.88a1,1,0,1,1,1.41,1.41Z"/></svg>
+                </div>
+                <div class="content-right">
+                    <h2>สรุปขั้นตอนการหาหัวข้อโครงงาน</h2>
+                    <ol>
+                        <li><b>มองรอบตัว:</b> สังเกตสิ่งต่างๆ ในชีวิตประจำวัน (บ้าน, โรงเรียน, ชุมชน)</li>
+                        <li><b>เชื่อมโยกคุณภาพชีวิต:</b> ปัญหานั้นเกี่ยวข้องกับคุณภาพชีวิตด้านไหน? (สิ่งแวดล้อม, สุขภาพ, ฯลฯ)</li>
+                        <li><b>ระดมสมอง:</b> รวบรวมปัญหาและความสงสัยให้ได้มากที่สุด</li>
+                        <li><b>คัดกรองและปั้น:</b> เลือกประเด็นที่น่าสนใจที่สุด แล้วทำให้เฉพาะเจาะจงและทำได้จริง โดยใช้เกณฑ์ (Specific, Measurable, Achievable, Relevant, Time-bound, Interesting)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Next Steps -->
+        <section class="slide">
+            <div class="slide-header">การบ้าน และสิ่งที่ต้องทำในคาบต่อไป</div>
+            <div class="slide-content content-full">
+                <div class="activity-box" style="background-color: #E6F6FF; border-color: var(--secondary-color);">
+                     <h3>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.89,3,10,5.89,11.83,7.72,13,6.55V14.41l-2.12-2.12a1,1,0,0,0-1.42,1.42L12,16.24l2.53-2.53a1,1,0,0,0-1.42-1.42L11,14.41V7.45l.89.89L14.11,6,12.89,4.72V3M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z"/></svg>
+                        สิ่งที่ต้องเตรียมสำหรับคาบหน้า
+                    </h3>
+                    <ul>
+                        <li><b>การบ้าน:</b> ให้แต่ละกลุ่มตัดสินใจเลือก <b>"ร่างหัวข้อโครงงาน"</b> ที่สนใจที่สุดมา 1-2 หัวข้อ</li>
+                        <li><b>เตรียมตัว:</b> เตรียมนำเสนอ "ร่างหัวข้อ" ของกลุ่มสั้นๆ ให้ครูและเพื่อนฟังในต้นคาบหน้า เพื่อรับความคิดเห็น</li>
+                        <li><b>คาบต่อไป (ครั้งที่ 5):</b> เราจะมาเรียนรู้ <b>"การตั้งคำถามโครงงาน และการกำหนดวัตถุประสงค์"</b> จากหัวข้อที่นักเรียนเลือกมา</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Q&A -->
+        <section class="slide">
+             <div class="slide-content content-full">
+                <h1>Q & A</h1>
+                <h2>มีคำถามหรือข้อสงสัยอะไรไหม?</h2>
+                <svg class="vector-image" style="max-width: 350px; margin-top: 30px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#005A8D" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z"/><path fill="#00A9E0" d="M256 128c-35.3 0-64 28.7-64 64h48c0-8.8 7.2-16 16-16s16 7.2 16 16c0 17.7-14.3 32-32 32v48h48v-32c35.3 0 64-28.7 64-64s-28.7-64-64-64zM248 328h16v16h-16z"/></svg>
+                 <p>ช่องทางการติดต่อ: <a href="mailto:chawadol_s@fangwit.ac.th">chawadol_s@fangwit.ac.th</a></p>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="nav-controls">
+        <span id="slide-counter">1 / 16</span>
+        <button id="prev-btn" class="nav-button">‹</button>
+        <button id="next-btn" class="nav-button">›</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const slideCounter = document.getElementById('slide-counter');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            slideCounter.textContent = `${index + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

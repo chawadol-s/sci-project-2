@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบงานที่ 4: จากปัญหาใกล้ตัวสู่หัวข้อโครงงานวิทยาศาสตร์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #005A8D;
+            --secondary-color: #00A9E0;
+            --accent-color: #FFC72C;
+            --bg-light-blue: #F0F7FF;
+            --bg-light-yellow: #FFF9E6;
+            --text-color: #333;
+            --border-color: #d0d0d0;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 20mm;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-block-start: 0.5em;
+            margin-block-end: 0.5em;
+        }
+
+        h1 { font-size: 24pt; text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 15px;}
+        h2 { font-size: 18pt; border-left: 5px solid var(--secondary-color); padding-left: 10px; }
+        h3 { font-size: 14pt; color: var(--secondary-color); font-weight: 600; }
+
+        p, li {
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+        
+        .student-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 12pt;
+        }
+        
+        .student-info .field {
+            display: flex;
+            align-items: center;
+        }
+
+        .student-info .label {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .student-info .underline {
+            border-bottom: 1px dotted var(--text-color);
+            min-width: 150px;
+            padding: 0 5px;
+        }
+
+        .activity-box {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        
+        .activity-box.highlight {
+             background-color: var(--bg-light-blue);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .activity-header svg {
+            width: 36px;
+            height: 36px;
+            fill: var(--primary-color);
+        }
+
+        .mindmap-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            min-height: 200px;
+            margin-top: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+        
+        .mindmap-center {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14pt;
+            font-weight: 700;
+            border: 2px solid #EAA900;
+        }
+        
+        .list-space ol {
+            padding-left: 25px;
+        }
+        
+        .list-space li {
+            margin-bottom: 15px;
+            padding-left: 5px;
+            border-bottom: 1px dotted var(--border-color);
+        }
+        
+        .template-box {
+            border: 1px solid var(--secondary-color);
+            background-color: var(--bg-light-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .template-field {
+            margin-bottom: 15px;
+        }
+
+        .template-field label {
+            font-weight: 700;
+            font-size: 12pt;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .template-field .input-area {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            min-height: 40px;
+            padding: 8px;
+        }
+        
+        .template-field .input-area.small {
+            min-height: 25px;
+        }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .checklist li {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--text-color);
+            margin-right: 8px;
+        }
+        
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            text-align: center;
+            font-size: 10pt;
+            color: #888;
+        }
+        
+        .page-number::before {
+            content: "หน้า ";
+        }
+        
+        .page-number::after {
+            content: " / 2";
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                padding: 0;
+            }
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1 -->
+    <div class="page page-break">
+        <h1>
+            ใบงานที่ 4: จากปัญหาใกล้ตัวสู่หัวข้อโครงงาน
+        </h1>
+        <div class="student-info">
+            <div class="field"><span class="label">ชื่อ-สกุล:</span><span class="underline"></span></div>
+            <div class="field"><span class="label">ชั้น:</span><span class="underline" style="min-width: 80px;"></span></div>
+            <div class="field"><span class="label">เลขที่:</span><span class="underline" style="min-width: 60px;"></span></div>
+        </div>
+
+        <!-- Activity 1 -->
+        <div class="activity-box highlight">
+            <div class="activity-header">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15,4V5h3.59L12,11.59,9.41,9,8,10.41l3,3L18,6.41V10h2V4ZM4,9a3,3,0,0,0,3,3H9v2H7a5,5,0,0,1-5-5V7H4ZM4,15H6v2H4ZM9,17h2v2H9Zm2-8H9V7h2Zm9,6h2v2H20Zm-2-2h2V9H18ZM15,17h2v2H15Zm-4,0h2v2H11Z"/></svg>
+                <h2>กิจกรรมที่ 1: Mind Map คุณภาพชีวิตในชุมชนของเรา</h2>
+            </div>
+            <h3>ส่วนที่ 1: ระดมสมองรายบุคคล (5 นาที)</h3>
+            <p>"คุณภาพชีวิตที่ดี" ในโรงเรียน หรือในชุมชนของนักเรียน ควรประกอบด้วยอะไรบ้าง? ลองเขียนออกมา</p>
+            <div class="list-space">
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>
+            <h3>ส่วนที่ 2: สร้าง Mind Map ของกลุ่ม (10 นาที)</h3>
+            <p>นำความคิดของทุกคนในกลุ่มมารวมกัน แล้วสร้างเป็น Mind Map ตรงกลางนี้</p>
+            <div class="mindmap-container">
+                <div class="mindmap-center">คุณภาพชีวิตที่ดี</div>
+            </div>
+        </div>
+
+        <!-- Activity 2 -->
+        <div class="activity-box">
+             <div class="activity-header">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71,19.29l-3.4-3.39A7.92,7.92,0,0,0,19,11a8,8,0,1,0-8,8,7.92,7.92,0,0,0,4.9-1.69l3.39,3.4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM5,11a6,6,0,1,1,6,6,6,6,0,0,1-6-6Z"/></svg>
+                <h2>กิจกรรมที่ 2: นักสืบสายปัญหา (Problem Hunter)</h2>
+            </div>
+            <h3>ขั้นตอนที่ 1: ระดมสมอง (5 นาที)</h3>
+            <p>เขียนรายการ "ปัญหา" "ความไม่สะดวก" หรือ "ความสงสัย" ที่พบเห็นในชีวิตประจำวัน (ที่บ้าน, โรงเรียน, ชุมชน) ให้ได้มากที่สุด</p>
+            <div class="list-space">
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <span class="page-number">1</span>
+            <p>รายวิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 (โครงงานวิทยาศาสตร์) | อ.ชวดล ศรีบุญพิมพ์สวย</p>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+        <!-- Activity 3 -->
+        <div class="activity-box">
+             <div class="activity-header">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.4,7.34,16.66,4.6A2,2,0,0,0,14.77,4l-9,9a2,2,0,0,0-.57,1.21L4,20.06a1,1,0,0,0,1,1,1,1,0,0,0,.06,0L10.84,20a2,2,0,0,0,1.21-.57l9-9a2,2,0,0,0,0-2.83ZM10.2,18.17,6,18l1.17-4.2,6-6L17.4,12.2ZM18.81,11,13,5.19l1.77-1.77L19.59,8.23Z"/></svg>
+                <h2>กิจกรรมที่ 3: ปั้นปัญหา... ให้เป็นหัวข้อโครงงาน</h2>
+            </div>
+             <p>จากรายการปัญหาในหน้าแรก ให้กลุ่มของนักเรียนเลือกปัญหาที่ "น่าสนใจที่สุด" มา 1-2 ปัญหา แล้วใช้แบบฟอร์มด้านล่างนี้เพื่อเปลี่ยนปัญหาให้เป็นร่างหัวข้อโครงงาน</p>
+        </div>
+
+        <!-- Template 1 -->
+        <div class="template-box">
+            <h3>แบบร่างหัวข้อโครงงานที่ 1</h3>
+            <div class="template-field">
+                <label>ปัญหาคืออะไร:</label>
+                <div class="input-area small"></div>
+            </div>
+             <div class="template-field">
+                <label>ปัญหานี้ส่งผลต่อคุณภาพชีวิตด้านไหน:</label>
+                <div class="input-area small"></div>
+            </div>
+             <div class="template-field">
+                <label>เราอยากรู้อะไรเกี่ยวกับปัญหานี้ (ตั้งเป็นคำถาม):</label>
+                <div class="input-area"></div>
+            </div>
+            <div class="template-field">
+                <label>ร่างหัวข้อโครงงาน (ลองตั้งชื่อ):</label>
+                <div class="input-area"></div>
+            </div>
+            <div class="template-field">
+                <label>ตรวจสอบเบื้องต้น (SMART + I):</label>
+                 <ul class="checklist">
+                    <li><div class="checkbox"></div> <b>S</b> - เฉพาะเจาะจง</li>
+                    <li><div class="checkbox"></div> <b>M</b> - วัดผลได้</li>
+                    <li><div class="checkbox"></div> <b>A</b> - ทำได้จริง</li>
+                    <li><div class="checkbox"></div> <b>R</b> - มีประโยชน์</li>
+                    <li><div class="checkbox"></div> <b>T</b> - มีกรอบเวลา</li>
+                    <li><div class="checkbox"></div> <b>I</b> - น่าสนใจ</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Template 2 -->
+        <div class="template-box" style="background-color: var(--bg-light-yellow);">
+            <h3>แบบร่างหัวข้อโครงงานที่ 2 (ถ้ามี)</h3>
+             <div class="template-field">
+                <label>ปัญหาคืออะไร:</label>
+                <div class="input-area small"></div>
+            </div>
+             <div class="template-field">
+                <label>เราอยากรู้อะไรเกี่ยวกับปัญหานี้ (ตั้งเป็นคำถาม):</label>
+                <div class="input-area"></div>
+            </div>
+            <div class="template-field">
+                <label>ร่างหัวข้อโครงงาน (ลองตั้งชื่อ):</label>
+                <div class="input-area"></div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="page-number">2</span>
+            <p>รายวิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 (โครงงานวิทยาศาสตร์) | อ.ชวดล ศรีบุญพิมพ์สวย</p>
+        </div>
+    </div>
+
+</body>
+</html>
