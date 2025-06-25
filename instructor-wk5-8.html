@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนการสอน (Scrollable) - วิทยาศาสตร์เพิ่มเติม 3 (คาบที่ 5-8)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #005A9C; /* Deep Blue */
+            --secondary-color: #4CAF50; /* Green */
+            --accent-color: #FFC107; /* Amber */
+            --text-color: #333333;
+            --bg-color: #F4F6F8;
+            --white-color: #FFFFFF;
+            --section-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        
+        main {
+            width: 100%;
+        }
+
+        .content-section {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            box-shadow: var(--section-shadow);
+            padding: 40px 50px;
+            margin: 40px auto;
+            max-width: 1200px;
+            width: 90%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .section-header {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header .icon {
+            margin-right: 15px;
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+        }
+
+        .section-content {
+            font-size: 1.15em;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        
+        .hero-section .course-title {
+            font-size: 2em;
+            color: var(--primary-color);
+        }
+        
+        .hero-section .session-title {
+            font-size: 3em;
+            color: var(--text-color);
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section .instructor-info {
+            font-size: 1.4em;
+            color: var(--primary-color);
+        }
+        
+        #toc {
+            background-color: var(--white-color);
+            padding: 25px;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: var(--section-shadow);
+            max-width: 1200px;
+            width: 90%;
+        }
+        
+        #toc h2 {
+            margin-top: 0;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        #toc ol {
+            columns: 2;
+            padding-left: 30px;
+        }
+
+        #toc li {
+            margin-bottom: 10px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.4em; }
+
+        ul.checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.checklist li {
+            background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>') no-repeat left center;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .vector-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 450px;
+        }
+        
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .activity-box {
+            background-color: #E3F2FD;
+            border-left: 8px solid var(--primary-color);
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+        
+        .activity-box h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.3em;
+        }
+        .activity-box .icon {
+             margin-right: 10px;
+             width: 30px;
+             height: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.1em;
+        }
+        .comparison-table .bad {
+            color: #D32F2F;
+        }
+        .comparison-table .good {
+            color: #388E3C;
+            font-weight: bold;
+        }
+        
+        .section-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #777;
+            text-align: right;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .vector-image {
+                max-height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-header {
+                font-size: 1.8em;
+            }
+            .content-section, #toc {
+                padding: 25px;
+                width: 95%;
+            }
+             .hero-section .course-title { font-size: 1.5em; }
+             .hero-section .session-title { font-size: 2.2em; }
+             .hero-section .instructor-info { font-size: 1.2em; }
+             #toc ol { columns: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        
+        <header class="hero-section">
+            <div class="course-title">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3</div>
+            <div class="session-title">การวางแผนและออกแบบโครงงาน (คาบที่ 5-8)</div>
+            <div class="instructor-info">อาจารย์ชวดล ศรีบุญพิมพ์สวย</div>
+        </header>
+
+        <nav id="toc">
+            <h2>สารบัญการเรียนรู้</h2>
+            <ol>
+                <li><a href="#session-5">คาบที่ 5: การตั้งคำถามและวัตถุประสงค์</a></li>
+                <li><a href="#topic-vs-question">หัวข้อ vs คำถามโครงงาน</a></li>
+                <li><a href="#finer-principle">หลักการตั้งคำถาม (FINER)</a></li>
+                <li><a href="#question-to-objective">จากคำถามสู่วัตถุประสงค์</a></li>
+                <li><a href="#session-6">คาบที่ 6: การศึกษาเอกสาร และการตั้งสมมติฐาน</a></li>
+                <li><a href="#literature-review">ทำไมต้องศึกษาเอกสาร?</a></li>
+                <li><a href="#hypothesis">การตั้งสมมติฐาน (Hypothesis)</a></li>
+                <li><a href="#session-7">คาบที่ 7: การกำหนดตัวแปร และนิยามเชิงปฏิบัติการ</a></li>
+                <li><a href="#variables">ตัวแปรในการทดลอง</a></li>
+                <li><a href="#operational-definition">นิยามเชิงปฏิบัติการ</a></li>
+                <li><a href="#session-8">คาบที่ 8: การออกแบบวิธีการดำเนินงาน</a></li>
+                <li><a href="#methodology">การออกแบบวิธีการดำเนินงาน</a></li>
+                <li><a href="#safety">ความปลอดภัยในการทดลอง</a></li>
+                <li><a href="#summary">สรุปและก้าวต่อไป</a></li>
+            </ol>
+        </nav>
+
+        <!-- === คาบที่ 5: การตั้งคำถามและวัตถุประสงค์ === -->
+        <section class="content-section" id="session-5">
+            <div class="section-header">
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5,12c2.5,0,4.5,2,4.5,4.5s-2,4.5-4.5,4.5s-4.5-2-4.5-4.5S13,12,15.5,12 M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M10,2H12V4.08C12.47,4.03 12.96,4 13.46,4C14.16,4 14.84,4.12 15.5,4.34L16.5,2.5L18.33,3.5L17.33,5.34C17.9,5.83 18.4,6.39 18.79,7H21V9H18.79C19.18,10.16 19.31,11.39 19.17,12.62L21,14.5L19.5,16.5L17.5,14.88C16.5,18.17 13.5,20.62 10,20.93V23H8V20.93C4.5,20.62 1.5,18.17 0.5,14.88L0,16L-1.5,14.5L0.83,12.62C0.69,11.39 0.82,10.16 1.21,9H-1V7H1.21C1.6,6.39 2.1,5.83 2.67,5.34L1.67,3.5L3.5,2.5L4.5,4.34C5.16,4.12 5.84,4 6.54,4C7.04,4 7.53,4.03 8,4.08V2H10Z" /></svg>
+                คาบที่ 5: การตั้งคำถามและวัตถุประสงค์
+            </div>
+            <div class="section-content">
+                <h2>เป้าหมายของคาบเรียนนี้</h2>
+                <ul class="checklist">
+                    <li>ทบทวนการระบุปัญหาที่สนใจจากคาบที่แล้ว</li>
+                    <li>เรียนรู้วิธีเปลี่ยน "หัวข้อ" ให้เป็น "คำถามโครงงาน" ที่ดี</li>
+                    <li>ฝึกการตั้งคำถามโครงงานวิทยาศาสตร์ที่ชัดเจนและนำไปสู่การสำรวจได้</li>
+                    <li>เรียนรู้วิธีการกำหนด "วัตถุประสงค์" ของโครงงาน</li>
+                    <li>ฝึกการกำหนดวัตถุประสงค์ให้สอดคล้องกับคำถามโครงงาน</li>
+                </ul>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 5</div>
+        </section>
+
+        <section class="content-section" id="topic-vs-question">
+            <div class="section-header">หัวข้อโครงงาน vs คำถามโครงงาน</div>
+            <div class="section-content content-grid">
+                <div>
+                    <h3>หัวข้อโครงงาน (Project Topic)</h3>
+                    <p>คือเรื่องกว้างๆ ที่นักเรียนสนใจ อาจเป็นแนวคิดหรือประเด็นปัญหาก็ได้</p>
+                    <ul class="checklist">
+                        <li>การปลูกพืชไร้ดิน</li>
+                        <li>ขยะพลาสติกในโรงเรียน</li>
+                        <li>ประสิทธิภาพของเจลล้างมือ</li>
+                    </ul>
+                    <h3>คำถามโครงงาน (Project Question)</h3>
+                    <p>คือการเปลี่ยนหัวข้อที่กว้าง ให้เป็นคำถามที่เฉพาะเจาะจง สามารถหาคำตอบได้ด้วยกระบวนการทางวิทยาศาสตร์</p>
+                     <ul class="checklist">
+                        <li>ปัจจัยใดมีผลต่อการเจริญเติบโตของผักสลัดที่ปลูกแบบไฮโดรโปนิกส์มากที่สุด?</li>
+                        <li>เราจะลดปริมาณขวดน้ำพลาสติกในโรงอาหารได้อย่างไร?</li>
+                        <li>เจลล้างมือสูตรใดมีประสิทธิภาพในการยับยั้งเชื้อแบคทีเรียบนมือได้ดีที่สุด?</li>
+                    </ul>
+                </div>
+                <div class="centered-image">
+                     <svg class="vector-image" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(0, 20)">
+                            <text x="150" y="0" font-size="24" text-anchor="middle" font-weight="bold" fill="#005A9C">หัวข้อกว้างๆ</text>
+                            <path d="M 150 70 Q 150 110, 150 150" stroke="#005A9C" stroke-width="4" fill="none" stroke-dasharray="8,8"/>
+                            <path d="M 145 140 L 150 150 L 155 140" stroke="#005A9C" stroke-width="4" fill="none"/>
+                            <ellipse cx="150" cy="40" rx="100" ry="25" fill="#E3F2FD" stroke="#005A9C" stroke-width="2"/>
+                            <text x="150" y="45" font-size="18" text-anchor="middle">ขยะพลาสติก</text>
+                            <rect x="50" y="160" width="200" height="80" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="150" y="180" font-size="20" text-anchor="middle" font-weight="bold" fill="#388E3C">คำถามเฉพาะเจาะจง</text>
+                            <text x="150" y="215" font-size="14" text-anchor="middle">เราจะลดขวดพลาสติกในโรงอาหาร</text>
+                             <text x="150" y="230" font-size="14" text-anchor="middle">ได้อย่างไร?</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+             <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    กิจกรรมที่ 5.1: ฝึกตั้งคำถามโครงงาน
+                </h3>
+                <p>ให้นักเรียนแต่ละกลุ่ม นำ "หัวข้อ/ปัญหา" ที่ระดมสมองไว้จากคาบที่แล้ว มาลองเปลี่ยนให้เป็น <strong>"คำถามโครงงาน"</strong> ที่เฉพาะเจาะจงตามหลัก FINER ให้ได้กลุ่มละ 2-3 คำถาม จากนั้นเตรียมนำเสนอให้เพื่อนและครูฟังเพื่อรับข้อเสนอแนะ</p>
+                <p><strong>เวลา:</strong> 20 นาที</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 5</div>
+        </section>
+        
+        <section class="content-section" id="finer-principle">
+            <div class="section-header">หลักการตั้งคำถามโครงงานที่ดี</div>
+            <div class="section-content">
+                <h2>คำถามที่ดีควรมีลักษณะ "FINER"</h2>
+                 <div class="content-grid">
+                     <div>
+                        <ul class="checklist">
+                            <li><b>F - Feasible (ทำได้จริง):</b> สามารถทำได้สำเร็จภายใต้ข้อจำกัดด้านเวลา งบประมาณ และอุปกรณ์ที่มี</li>
+                            <li><b>I - Interesting (น่าสนใจ):</b> เป็นเรื่องที่นักเรียนและผู้อื่นสนใจใคร่รู้</li>
+                            <li><b>N - Novel (มีความใหม่):</b> เป็นการต่อยอดความรู้เดิม หรือหาคำตอบในมุมมองใหม่ๆ (ในระดับของเรา)</li>
+                            <li><b>E - Ethical (มีจริยธรรม):</b> ไม่ก่อให้เกิดอันตรายต่อสิ่งมีชีวิตและสิ่งแวดล้อม</li>
+                            <li><b>R - Relevant (เกี่ยวข้อง/เป็นประโยชน์):</b> คำตอบที่ได้มีความสำคัญ สามารถนำไปใช้ประโยชน์ หรือเชื่อมโยงกับคุณภาพชีวิตได้</li>
+                        </ul>
+                    </div>
+                    <div class="centered-image">
+                       <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                <feOffset dx="2" dy="2" result="offsetblur"/>
+                                <feComponentTransfer>
+                                    <feFuncA type="linear" slope="0.5"/>
+                                </feComponentTransfer>
+                                <feMerge> 
+                                    <feMergeNode/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                                </filter>
+                            </defs>
+                            <g style="filter:url(#shadow)">
+                                <path d="M50 20 H250 A 10 10 0 0 1 260 30 V 220 A 10 10 0 0 1 250 230 H 50 A 10 10 0 0 1 40 220 V 30 A 10 10 0 0 1 50 20 Z" fill="#FFC107"/>
+                                <path d="M40 30 L60 30 L60 10" fill="#FFFDE7" stroke="#FFC107" stroke-width="2"/>
+                                <text x="150" y="50" font-size="24" text-anchor="middle" font-weight="bold" fill="white">Checklist คำถาม</text>
+                                <text x="70" y="90" font-size="18">F - ทำได้จริง</text>
+                                <text x="70" y="120" font-size="18">I - น่าสนใจ</text>
+                                <text x="70" y="150" font-size="18">N - มีความใหม่</text>
+                                <text x="70" y="180" font-size="18">E - มีจริยธรรม</text>
+                                <text x="70" y="210" font-size="18">R - เป็นประโยชน์</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 5</div>
+        </section>
+        
+        <section class="content-section" id="question-to-objective">
+            <div class="section-header">จากคำถามสู่วัตถุประสงค์</div>
+            <div class="section-content content-grid">
+                <div>
+                    <h2>วัตถุประสงค์ (Objectives) คืออะไร?</h2>
+                    <p>วัตถุประสงค์ คือสิ่งที่บอกว่าเราจะ "ทำอะไร" ในโครงงานนี้ เพื่อให้สามารถตอบ "คำถามโครงงาน" ได้ เป็นเหมือนการตั้งเป้าหมายย่อยๆ ที่ชัดเจนและวัดผลได้</p>
+                    <h3>หลักการเขียนวัตถุประสงค์ที่ดี</h3>
+                    <ul class="checklist">
+                        <li><strong>ขึ้นต้นด้วยคำกริยา:</strong> เช่น เพื่อศึกษา, เพื่อเปรียบเทียบ, เพื่อสร้าง, เพื่อหาประสิทธิภาพ</li>
+                        <li><strong>สอดคล้องกับคำถาม:</strong> ทุกข้อของวัตถุประสงค์ต้องช่วยในการตอบคำถามหลักของโครงงาน</li>
+                        <li><strong>เฉพาะเจาะจงและวัดผลได้:</strong> ระบุให้ชัดเจนว่าจะศึกษาอะไร วัดค่าอะไร</li>
+                    </ul>
+                </div>
+                <div class="centered-image">
+                    <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                        <text x="150" y="25" text-anchor="middle" font-size="20" font-weight="bold" fill="#005A9C">คำถามโครงงาน?</text>
+                        <path d="M150 40 V 80" stroke="#FFC107" stroke-width="3" stroke-dasharray="5,5"/>
+                        <path d="M145 75 L150 85 L155 75" fill="#FFC107"/>
+                        
+                        <rect x="20" y="90" width="260" height="140" rx="10" fill="#f1f8e9" stroke="#4CAF50" stroke-width="2"/>
+                        <text x="150" y="115" text-anchor="middle" font-size="20" font-weight="bold" fill="#388E3C">วัตถุประสงค์</text>
+                        
+                        <text x="40" y="150" font-size="16">1. เพื่อศึกษา...</text>
+                        <text x="40" y="180" font-size="16">2. เพื่อเปรียบเทียบ...</text>
+                        <text x="40" y="210" font-size="16">3. เพื่อสร้าง...</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    กิจกรรมที่ 5.2: กำหนดวัตถุประสงค์โครงงาน
+                </h3>
+                <p>ให้นักเรียนแต่ละกลุ่ม เลือก "คำถามโครงงาน" ที่ดีที่สุดของกลุ่มมา 1 คำถาม จากนั้นระดมสมองเพื่อเขียน <strong>"วัตถุประสงค์"</strong> ของโครงงานให้สอดคล้องกัน (ประมาณ 1-3 ข้อ)</p>
+                 <p><strong>นำเสนอ:</strong> แต่ละกลุ่มส่งตัวแทนออกมานำเสนอคำถามและวัตถุประสงค์ของกลุ่ม เพื่อให้เพื่อนและครูช่วยกันตรวจสอบและให้ข้อเสนอแนะ</p>
+                <p><strong>เวลา:</strong> 25 นาที (รวมนำเสนอ)</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 5</div>
+        </section>
+
+        <!-- === คาบที่ 6: การศึกษาเอกสารและสมมติฐาน === -->
+        <section class="content-section" id="session-6">
+            <div class="section-header">
+                 <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2M12,15.5C12,16.04 11.83,16.54 11.53,16.94L10.11,15.53C10.5,15.2 11,15 11.5,15C12.33,15 13,15.67 13,16.5C13,17.33 12.33,18 11.5,18C11,18 10.5,17.8 10.11,17.47L8.7,18.89C9.53,19.59 10.5,20 11.5,20C13.43,20 15,18.43 15,16.5C15,15.23 14.18,14.16 13,13.67V13.5C13.9,13.12 14.5,12.17 14.5,11C14.5,9.62 13.38,8.5 12,8.5C10.62,8.5 9.5,9.62 9.5,11C9.5,12.17 10.1,13.12 11,13.5V13.67C9.82,14.16 9,15.23 9,16.5H11V15.5Z" /></svg>
+                คาบที่ 6: การศึกษาเอกสาร และการตั้งสมมติฐาน
+            </div>
+            <div class="section-content">
+                <h2>เป้าหมายของคาบเรียนนี้</h2>
+                <ul class="checklist">
+                    <li>เข้าใจความสำคัญของการศึกษาข้อมูลและงานวิจัยที่เกี่ยวข้อง</li>
+                    <li>รู้จักแหล่งข้อมูลที่น่าเชื่อถือสำหรับการค้นคว้าทางวิทยาศาสตร์</li>
+                    <li>เรียนรู้ความหมายและองค์ประกอบของ "สมมติฐาน"</li>
+                    <li>ฝึกการตั้งสมมติฐานที่สามารถทดสอบได้สำหรับโครงงานของตนเอง</li>
+                </ul>
+                <div class="centered-image">
+                    <svg class="vector-image" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                           <rect x="10" y="20" width="180" height="160" rx="10" fill="#E3F2FD"/>
+                           <circle cx="100" cy="60" r="25" fill="#2196F3"/>
+                           <path d="M92 60 L108 60 M100 52 L100 68" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                           <text x="100" y="110" font-size="18" text-anchor="middle" font-weight="bold" fill="#005A9C">สมมติฐาน</text>
+                           <text x="100" y="135" font-size="14" text-anchor="middle">"ถ้า... ดังนั้น... เพราะ..."</text>
+                        </g>
+                        <g>
+                           <rect x="210" y="20" width="180" height="160" rx="10" fill="#E8F5E9"/>
+                           <path d="M240 60 L360 60 L360 80 L240 80 Z M240 90 L360 90 L360 110 L240 110 Z M240 120 L300 120 L300 140 L240 140 Z" fill="#4CAF50"/>
+                           <text x="300" y="165" font-size="18" text-anchor="middle" font-weight="bold" fill="#388E3C">ศึกษาเอกสาร</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 6</div>
+        </section>
+
+        <section class="content-section" id="literature-review">
+            <div class="section-header">ทำไมต้องศึกษาเอกสารที่เกี่ยวข้อง?</div>
+            <div class="section-content content-grid">
+                 <div>
+                    <p>การศึกษาข้อมูลที่คนอื่นเคยทำมาแล้ว (Literature Review) เป็นขั้นตอนที่สำคัญมาก เปรียบเสมือนการ "ดูแผนที่" ก่อนออกเดินทาง</p>
+                    <h3>ประโยชน์ของการศึกษาเอกสาร</h3>
+                    <ul class="checklist">
+                        <li><b>ไม่ทำงานซ้ำซ้อน:</b> ช่วยให้รู้ว่ามีใครเคยตอบคำถามคล้ายๆ กับเราไปแล้วหรือยัง</li>
+                        <li><b>ได้แนวคิดเพิ่มเติม:</b> อาจเจอวิธีการทดลอง วัสดุ หรือมุมมองใหม่ๆ ที่น่าสนใจ</li>
+                        <li><b>ช่วยในการออกแบบ:</b> ทำให้รู้ว่าควรออกแบบการทดลองอย่างไร มีตัวแปรอะไรที่ต้องควบคุมบ้าง</li>
+                        <li><b>สนับสนุนสมมติฐาน:</b> ใช้ข้อมูลทางทฤษฎีหรือผลงานวิจัยมายืนยันว่าสมมติฐานของเรามีเหตุผล</li>
+                         <li><b>ใช้อ้างอิงในรายงาน:</b> ทำให้โครงงานของเราน่าเชื่อถือมากขึ้น</li>
+                    </ul>
+                </div>
+                <div class="centered-image">
+                    <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50,230 C 50,230 20,150 70,100 S 150,0 150,0" fill="none" stroke="#BDBDBD" stroke-width="5" stroke-dasharray="10"/>
+                        <path d="M 150,0 C 150,0 180,80 230,120 S 250,230 250,230" fill="none" stroke="#4CAF50" stroke-width="5"/>
+                        <circle cx="150" cy="0" r="15" fill="#4CAF50"/>
+                        <text x="150" y="-10" font-size="14" text-anchor="middle">โครงงานเรา</text>
+                        <circle cx="50" cy="230" r="15" fill="#005A9C"/>
+                        <text x="50" y="255" font-size="14" text-anchor="middle">เริ่มต้น</text>
+                        <circle cx="250" cy="230" r="15" fill="#F44336"/>
+                        <text x="250" y="255" font-size="14" text-anchor="middle">เป้าหมาย</text>
+                        <text x="90" y="60" font-size="16" fill="#333" transform="rotate(-30, 90, 60)">ทางลัด!</text>
+                        <text x="100" y="180" font-size="16" fill="#BDBDBD">ลองผิดลองถูก</text>
+                    </svg>
+                </div>
+            </div>
+             <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L21.5,20L20,21.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+                    กิจกรรมที่ 6.1: สืบค้นข้อมูลเบื้องต้น
+                </h3>
+                <p>ให้นักเรียนแต่ละกลุ่ม ใช้เวลา 20 นาทีในการค้นหาข้อมูลที่เกี่ยวข้องกับหัวข้อโครงงานของตนเองจากแหล่งข้อมูลที่แนะนำ ลองหา "คำสำคัญ (Keywords)" ที่เกี่ยวข้องแล้วเริ่มค้นหา</p>
+                <p><strong>เป้าหมาย:</strong> หาเอกสารหรืองานวิจัยที่เกี่ยวข้องให้ได้อย่างน้อย 2-3 ชิ้น และจดบันทึกประเด็นสำคัญที่ค้นพบ</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 6</div>
+        </section>
+
+        <section class="content-section" id="hypothesis">
+            <div class="section-header">การตั้งสมมติฐาน (Hypothesis)</div>
+            <div class="section-content content-grid">
+                <div>
+                    <h2>สมมติฐาน คืออะไร?</h2>
+                    <p>สมมติฐาน คือ <strong>"การคาดเดาคำตอบ"</strong> ของคำถามโครงงานอย่างมีเหตุผล โดยอาศัยข้อมูลจากการศึกษาเอกสารหรือความรู้เดิมมาสนับสนุน เป็นข้อความที่แสดงความสัมพันธ์ระหว่างตัวแปรที่เราจะศึกษา</p>
+                     <h3>โครงสร้างของสมมติฐาน</h3>
+                    <p>มักจะเขียนในรูปแบบ "ถ้า... ดังนั้น... เพราะ..."</p>
+                    <ul class="checklist">
+                        <li><b>ถ้า (If):</b> ระบุการกระทำหรือตัวแปรที่เราจะเปลี่ยนแปลง (ตัวแปรต้น)</li>
+                        <li><b>ดังนั้น (Then):</b> ระบุผลที่คาดว่าจะเกิดขึ้นหรือสิ่งที่เราจะวัด (ตัวแปรตาม)</li>
+                        <li><b>เพราะ (Because):</b> ระบุเหตุผลทางวิทยาศาสตร์ที่มาสนับสนุนการคาดเดานั้น (จากข้อมูลที่ค้นคว้ามา)</li>
+                    </ul>
+                </div>
+                <div class="centered-image">
+                   <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                      <text x="150" y="20" font-size="22" text-anchor="middle" font-weight="bold" fill="#005A9C">สมมติฐาน</text>
+                      <g transform="translate(0, 40)">
+                         <rect x="20" y="10" width="80" height="150" rx="10" fill="#E3F2FD"/>
+                         <text x="60" y="40" font-size="24" text-anchor="middle" font-weight="bold" fill="#005A9C">ถ้า</text>
+                         <text x="60" y="70" font-size="12" text-anchor="middle">ใส่ปุ๋ย</text>
+                         
+                         <path d="M 100 85 H 120 L 115 80 M 115 90" stroke="#333" stroke-width="2" fill="none"/>
+
+                         <rect x="110" y="10" width="80" height="150" rx="10" fill="#FFF9C4"/>
+                         <text x="150" y="40" font-size="24" text-anchor="middle" font-weight="bold" fill="#F57F17">ดังนั้น</text>
+                         <text x="150" y="70" font-size="12" text-anchor="middle">พืชโตสูง</text>
+
+                         <path d="M 190 85 H 210 L 205 80 M 205 90" stroke="#333" stroke-width="2" fill="none"/>
+
+                         <rect x="200" y="10" width="80" height="150" rx="10" fill="#E8F5E9"/>
+                         <text x="240" y="40" font-size="24" text-anchor="middle" font-weight="bold" fill="#388E3C">เพราะ</text>
+                         <text x="240" y="70" font-size="12" text-anchor="middle">ปุ๋ยมีธาตุอาหาร</text>
+                      </g>
+                   </svg>
+                </div>
+            </div>
+             <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    กิจกรรมที่ 6.2: ตั้งสมมติฐานของกลุ่ม
+                </h3>
+                <p>จากคำถามโครงงานของกลุ่ม และข้อมูลที่ได้จากการสืบค้นเบื้องต้น ให้นักเรียนแต่ละกลุ่มช่วยกันระดมสมองเพื่อตั้ง <strong>"สมมติฐาน"</strong> สำหรับโครงงานของตนเอง</p>
+                 <p>พยายามเขียนให้อยู่ในรูปแบบ "ถ้า... ดังนั้น... เพราะ..." ให้ชัดเจน และเตรียมอธิบายเหตุผลที่สนับสนุนสมมติฐานของกลุ่ม</p>
+                <p><strong>เวลา:</strong> 20 นาที</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 6</div>
+        </section>
+
+        <!-- === คาบที่ 7: การกำหนดตัวแปร และนิยามเชิงปฏิบัติการ === -->
+        <section class="content-section" id="session-7">
+            <div class="section-header">
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
+                คาบที่ 7: การกำหนดตัวแปร และนิยามเชิงปฏิบัติการ
+            </div>
+            <div class="section-content">
+                <h2>เป้าหมายของคาบเรียนนี้</h2>
+                <ul class="checklist">
+                    <li>เข้าใจความหมายและความสำคัญของตัวแปรประเภทต่างๆ ในโครงงานวิทยาศาสตร์</li>
+                    <li>สามารถระบุตัวแปรต้น ตัวแปรตาม และตัวแปรควบคุมจากสถานการณ์ที่กำหนดได้</li>
+                    <li>สามารถกำหนดตัวแปรสำหรับโครงงานของกลุ่มตนเองได้</li>
+                    <li>เข้าใจความหมายและสามารถเขียน "นิยามเชิงปฏิบัติการ" เพื่อระบุวิธีการวัดตัวแปรได้อย่างชัดเจน</li>
+                </ul>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 7</div>
+        </section>
+
+        <section class="content-section" id="variables">
+            <div class="section-header">ตัวแปรในการทดลองคืออะไร?</div>
+            <div class="section-content">
+                <p>ตัวแปร (Variables) คือปัจจัยต่างๆ ที่เกี่ยวข้องกับการทดลอง ซึ่งอาจมีปริมาณหรือลักษณะที่เปลี่ยนแปลงได้ หรือถูกทำให้เปลี่ยนแปลง เพื่อศึกษาผลที่เกิดขึ้น การควบคุมตัวแปรเป็นหัวใจสำคัญของการทดลองที่น่าเชื่อถือ</p>
+                <h3>ตัวแปรมี 3 ประเภทหลัก</h3>
+                <div class="content-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 style="color: #1976D2;">1. ตัวแปรต้น (Independent Variable)</h3>
+                        <p>สิ่งที่เรา<strong>จงใจจัดให้แตกต่างกัน</strong>ในการทดลอง เพื่อดูผลที่จะเกิดขึ้น เป็น "สาเหตุ" ของการทดลอง</p>
+                    </div>
+                    <div style="background: #E8F5E9; padding: 20px; border-radius: 10px; text-align: center;">
+                         <h3 style="color: #388E3C;">2. ตัวแปรตาม (Dependent Variable)</h3>
+                        <p>ผลที่เกิดขึ้นจากการเปลี่ยนแปลงตัวแปรต้น เป็นสิ่งที่เราต้อง<strong>เฝ้าสังเกตและวัดผล</strong> เป็น "ผลลัพธ์" ของการทดลอง</p>
+                    </div>
+                    <div style="background: #FFFDE7; padding: 20px; border-radius: 10px; text-align: center;">
+                         <h3 style="color: #FBC02D;">3. ตัวแปรควบคุม (Controlled Variable)</h3>
+                        <p>ปัจจัยอื่นๆ ที่อาจส่งผลต่อการทดลองได้ ซึ่งเราต้อง<strong>ควบคุมให้เหมือนกันทุกชุดการทดลอง</strong> เพื่อให้แน่ใจว่าผลที่เกิดขึ้นมาจากตัวแปรต้นเท่านั้น</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 7</div>
+        </section>
+
+        <section class="content-section" id="operational-definition">
+            <div class="section-header">นิยามเชิงปฏิบัติการ (Operational Definition)</div>
+            <div class="section-content content-grid">
+                <div>
+                    <h2>คืออะไร? ทำไมสำคัญ?</h2>
+                    <p>นิยามเชิงปฏิบัติการ คือ <strong>การให้คำจำกัดความของตัวแปรต่างๆ ที่เราศึกษาให้ชัดเจนและสามารถวัดผลได้</strong></p>
+                    <p>มันเป็นการตอบคำถามว่า "เราจะวัดสิ่งนั้น...อย่างไร?" เพื่อให้ทุกคนที่อ่านโครงงานของเราเข้าใจตรงกัน และสามารถทำการทดลองซ้ำได้</p>
+                    <h3>ตัวอย่าง</h3>
+                    <p>ถ้าตัวแปรตามคือ "การเจริญเติบโตของพืช" คำนี้ยังกว้างเกินไป เราต้องระบุให้ชัดเจนในนิยามเชิงปฏิบัติการ:</p>
+                    <ul class="checklist">
+                        <li><strong>การเจริญเติบโตของพืช หมายถึง</strong> ความสูงของลำต้นในหน่วยเซนติเมตร ที่วัดจากโคนต้นระดับผิวดินถึงปลายยอด โดยใช้ไม้บรรทัดวัดทุกๆ 3 วัน</li>
+                        <li><strong>ประสิทธิภาพการไล่ยุง หมายถึง</strong> เปอร์เซ็นต์ของจำนวนยุงที่ไม่เข้ามาในบริเวณที่ทาสารสกัดภายในเวลา 10 นาที</li>
+                    </ul>
+                </div>
+                <div class="centered-image">
+                    <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                        <text x="150" y="30" font-size="22" text-anchor="middle" font-weight="bold" fill="#005A9C">"พืชเจริญเติบโต"</text>
+                        <text x="150" y="55" font-size="18" text-anchor="middle" fill="#D32F2F">(กว้างเกินไป)</text>
+                        
+                        <path d="M150 70 V 110" stroke="#FFC107" stroke-width="3" stroke-dasharray="5,5"/>
+                        <path d="M145 105 L150 115 L155 105" fill="#FFC107"/>
+                        
+                        <rect x="10" y="120" width="280" height="110" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                        <text x="150" y="145" font-size="18" text-anchor="middle" font-weight="bold" fill="#388E3C">นิยามเชิงปฏิบัติการ</text>
+                        <text x="30" y="175" font-size="14">วัดอะไร: ความสูง</text>
+                        <text x="30" y="195" font-size="14">หน่วยอะไร: เซนติเมตร</text>
+                        <text x="30" y="215" font-size="14">เครื่องมืออะไร: ไม้บรรทัด</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    กิจกรรมที่ 7.2: กำหนดตัวแปรและนิยามฯ ของกลุ่ม
+                </h3>
+                <p>ให้นักเรียนแต่ละกลุ่มกลับไปที่โครงงานของตนเอง และช่วยกันระดมสมองเพื่อตอบคำถามต่อไปนี้ลงในกระดาษหรือสมุด:</p>
+                <ol>
+                    <li><strong>ตัวแปรต้น</strong> ของโครงงานกลุ่มเราคืออะไร? (ระบุสิ่งที่จัดให้ต่างกัน)</li>
+                    <li><strong>ตัวแปรตาม</strong> ของโครงงานกลุ่มเราคืออะไร? (ระบุผลที่จะวัด)</li>
+                    <li><strong>ตัวแปรควบคุม</strong> ที่สำคัญมีอะไรบ้าง? (ระบุสิ่งที่ต้องทำให้เหมือนกัน อย่างน้อย 3-4 อย่าง)</li>
+                    <li><strong>นิยามเชิงปฏิบัติการ</strong> ของตัวแปรตามคืออะไร? (จะวัดผลนั้นด้วยวิธี อุปกรณ์ และหน่วยอะไร?)</li>
+                </ol>
+                 <p>ครูจะเดินให้คำปรึกษาแต่ละกลุ่ม</p>
+                <p><strong>เวลา:</strong> 25 นาที</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 7</div>
+        </section>
+
+        <!-- === คาบที่ 8: การออกแบบวิธีการดำเนินงาน === -->
+        <section class="content-section" id="session-8">
+            <div class="section-header">
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2L3,7V17L12,22L21,17V7L12,2M12,11.16L18.5,7.5L12,3.84L5.5,7.5L12,11.16M11,12V19.95L4,16.22V8.28L11,12M13,12L20,8.28V16.22L13,19.95V12Z" /></svg>
+                คาบที่ 8: การออกแบบวิธีการดำเนินงาน
+            </div>
+            <div class="section-content">
+                <h2>เป้าหมายของคาบเรียนนี้</h2>
+                <ul class="checklist">
+                    <li>เข้าใจองค์ประกอบสำคัญของการออกแบบวิธีการดำเนินงาน หรือ "ระเบียบวิธีวิจัย"</li>
+                    <li>สามารถระบุรายการวัสดุ-อุปกรณ์ที่ต้องใช้ในโครงงานได้อย่างละเอียด</li>
+                    <li>เรียนรู้หลักการเขียนขั้นตอนการดำเนินงานที่ชัดเจน เป็นลำดับ และผู้อื่นสามารถทำตามได้</li>
+                    <li>ฝึกออกแบบและเขียนวิธีการดำเนินงานสำหรับโครงงานของกลุ่มตนเอง</li>
+                    <li>ตระหนักถึงความสำคัญของความปลอดภัยในการทดลอง</li>
+                </ul>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 8</div>
+        </section>
+
+        <section class="content-section" id="methodology">
+            <div class="section-header">การออกแบบวิธีการดำเนินงาน (Methodology)</div>
+            <div class="section-content content-grid">
+                <div>
+                    <h2>เปรียบเสมือน "สูตรอาหาร"</h2>
+                    <p>ส่วนนี้ในรายงานโครงงาน คือส่วนที่สำคัญที่สุดส่วนหนึ่ง เพราะมันคือการบอกเล่าอย่างละเอียดว่านักเรียน <strong>"ทำอะไร"</strong> และ <strong>"ทำอย่างไร"</strong> เพื่อหาคำตอบให้กับคำถามโครงงาน</p>
+                    <p>การเขียนที่ดีต้องละเอียดพอที่คนอื่นจะสามารถอ่านและทำตามการทดลองของเราซ้ำได้ทุกขั้นตอน และควรจะได้ผลลัพธ์ที่ใกล้เคียงกัน</p>
+                    <h3>องค์ประกอบหลัก</h3>
+                    <ol>
+                        <li><strong>วัสดุและอุปกรณ์ (Materials and Equipment)</strong></li>
+                        <li><strong>ขั้นตอนการดำเนินงาน (Procedures)</strong></li>
+                    </ol>
+                </div>
+                <div class="centered-image">
+                    <svg class="vector-image" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30 10 H270 V240 H30Z" fill="#fff" stroke="#ccc" stroke-width="2"/>
+                        <path d="M40 20 H100" stroke="#000"/>
+                        <text x="110" y="25" font-size="18" font-weight="bold">สูตรอาหาร</text>
+                        <text x="40" y="50" font-size="14" font-weight="bold">ส่วนผสม:</text>
+                        <text x="50" y="70" font-size="12">- แป้ง 2 ถ้วย</text>
+                        <text x="50" y="85" font-size="12">- น้ำตาล 1 ถ้วย</text>
+                        <text x="40" y="115" font-size="14" font-weight="bold">วิธีทำ:</text>
+                        <text x="50" y="135" font-size="12">1. ร่อนแป้ง...</text>
+                        <text x="50" y="150" font-size="12">2. ผสมน้ำตาล...</text>
+                        
+                        <path d="M150 100 L180 100" stroke="blue" stroke-width="4"/>
+                        <path d="M175 95 L185 100 L175 105" fill="blue"/>
+
+                        <text x="190" y="80" font-size="14" font-weight="bold">วัสดุอุปกรณ์</text>
+                        <text x="190" y="130" font-size="14" font-weight="bold">ขั้นตอน</text>
+                    </svg>
+                </div>
+            </div>
+             <div class="activity-box">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" /></svg>
+                    กิจกรรมที่ 8.1: ออกแบบการทดลองของกลุ่มเรา
+                </h3>
+                <p>ให้นักเรียนแต่ละกลุ่ม ช่วยกันระดมสมองและร่าง <strong>"วิธีการดำเนินงาน"</strong> สำหรับโครงงานของตนเอง โดยเขียนแยกเป็น 2 ส่วนหลัก:</p>
+                <p><strong>1. รายการวัสดุ-อุปกรณ์:</strong><br/>
+                เขียนรายการทุกอย่างที่ต้องใช้ให้ละเอียดที่สุดเท่าที่จะนึกออก (ระบุจำนวน ขนาด หรือความเข้มข้นด้วย)</p>
+                
+                <p><strong>2. ขั้นตอนการดำเนินงาน:</strong><br/>
+                เขียนขั้นตอนการทดลองเป็นข้อๆ อย่างละเอียด ตั้งแต่การเตรียม การจัดชุดทดลอง การควบคุมตัวแปร ไปจนถึงการเก็บข้อมูล</p>
+
+                <p><strong>เป้าหมาย:</strong> ร่างแผนการทดลองฉบับแรกของกลุ่ม เพื่อเป็นพื้นฐานในการเขียน "เค้าโครงโครงงาน" ในคาบต่อไป</p>
+                <p><strong>เวลา:</strong> 30 นาที</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 8</div>
+        </section>
+
+        <section class="content-section" id="safety">
+            <div class="section-header">
+                 <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" /></svg>
+                ข้อควรระวัง: ความปลอดภัยในการทดลอง
+            </div>
+            <div class="section-content">
+                <h2>Safety First! ปลอดภัยไว้ก่อน</h2>
+                <p>ในการออกแบบการทดลอง ต้องคำนึงถึงความปลอดภัยเสมอ</p>
+                <ul class="checklist">
+                    <li><strong>การใช้อุปกรณ์:</strong> ใช้อุปกรณ์ให้ถูกวิธีและถูกต้องตามประเภทการใช้งาน เช่น ไม่ใช้บีกเกอร์ไปต้มสารโดยตรง</li>
+                    <li><strong>การใช้สารเคมี:</strong> หากมีการใช้สารเคมี ควรสวมถุงมือและแว่นตานิรภัย และศึกษาวิธีการจัดการที่ถูกต้อง</li>
+                    <li><strong>การทำงานกับความร้อน:</strong> ใช้ที่จับกันความร้อนเสมอเมื่อต้องจับภาชนะที่ร้อน</li>
+                    <li><strong>การทำงานกับสิ่งมีชีวิต:</strong> ต้องทำด้วยความระมัดระวัง ไม่ทารุณกรรมสัตว์ และไม่ทำให้เกิดผลกระทบเชิงลบต่อระบบนิเวศ</li>
+                    <li><strong>การจัดการของเสีย:</strong> ทิ้งสารเคมีหรือขยะจากการทดลองในที่ที่จัดเตรียมไว้ให้เท่านั้น</li>
+                </ul>
+                <p><strong>สำคัญ:</strong> หากไม่แน่ใจขั้นตอนใดๆ หรือการใช้อุปกรณ์ชิ้นไหน ให้ปรึกษาครูผู้สอนทันที</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 8</div>
+        </section>
+        
+        <section class="content-section" id="summary">
+            <div class="section-header">
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4L14,9L19,9.5L15.5,12.5L16.5,17.5L12,15L7.5,17.5L8.5,12.5L5,9.5L10,9L12,4M12,6.8L10.8,9.2L8.2,9.6L10.1,11.4L9.6,14L12,12.7L14.4,14L13.9,11.4L15.8,9.6L13.2,9.2L12,6.8Z" /></svg>
+                สรุปและก้าวต่อไป
+            </div>
+            <div class="section-content" style="text-align:center;">
+                 <h2>สรุปสิ่งที่เราเรียนรู้ใน 4 คาบนี้</h2>
+                <p style="font-size: 1.2em; text-align: left; max-width: 800px; margin: 0 auto;">
+                ✅ การเปลี่ยนหัวข้อให้เป็น <strong>คำถามโครงงาน</strong> ที่ดี<br/>
+                ✅ การตั้ง <strong>วัตถุประสงค์</strong> ให้สอดคล้องกับคำถาม<br/>
+                ✅ การสืบค้นข้อมูลและตั้ง <strong>สมมติฐาน</strong> อย่างมีเหตุผล<br/>
+                ✅ การกำหนด <strong>ตัวแปรต้น-ตาม-ควบคุม</strong> และ <strong>นิยามเชิงปฏิบัติการ</strong><br/>
+                ✅ การออกแบบ <strong>วิธีการดำเนินงาน</strong> (วัสดุและขั้นตอน)<br/>
+                </p>
+                
+                <h2 style="margin-top: 40px;">ก้าวต่อไป: คาบที่ 9-10</h2>
+                <p style="font-size: 1.5em; color: var(--primary-color);"><strong>การจัดทำเค้าโครงโครงงาน (Project Proposal)</strong></p>
+                <p style="font-size: 1.2em;">เราจะนำข้อมูลทั้งหมดที่ได้วางแผนไว้ มาเขียนรวมกันเป็นเอกสาร "เค้าโครงโครงงาน" เพื่อเสนอให้ครูอนุมัติก่อนลงมือทำจริง!</p>
+            </div>
+            <div class="section-footer">วิชา ว21101 วิทยาศาสตร์เพิ่มเติม 3 | คาบที่ 8</div>
+        </section>
+
+    </main>
+
+</body>
+</html>
